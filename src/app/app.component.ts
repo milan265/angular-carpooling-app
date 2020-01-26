@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'angular-carpooling-app';
 
-  ulogovan: boolean = true;
+  ulogovan: boolean = false;
 }
