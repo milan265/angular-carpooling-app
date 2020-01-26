@@ -1,0 +1,14 @@
+<section>
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <mat-form-field>
+            <input type="email" matInput placeholder="E-mail" ngModel name="email" email required >
+        </mat-form-field>
+        <mat-form-field>
+            <input [type]="tipLozinke" matInput placeholder="Lozinka" ngModel name="lozinka" required >
+            <button matSuffix mat-icon-button (click)="sakrijLozinku()">
+                <mat-icon>{{vidljivost}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Prijavi se</button>
+    </form>
+</section>

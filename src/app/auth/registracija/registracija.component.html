@@ -1,0 +1,30 @@
+<section>
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <mat-form-field>
+            <input type="text" matInput placeholder="Ime" ngModel name="ime" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="text" matInput placeholder="Prezime" ngModel name="prezime" required>
+        </mat-form-field>
+        <mat-form-field>
+            <input type="email" matInput placeholder="E-mail" ngModel name="email" email required #emailInput="ngModel">
+            <mat-error *ngIf="emailInput.hasError('required')">Polje mora biti popunjeno</mat-error>
+            <mat-error *ngIf="!emailInput.hasError('required')">E-mail nije u dobrom formatu</mat-error>
+        </mat-form-field>
+        <mat-form-field hintLabel="Lozinka mora imati više od 8 karaktera">
+            <input [type]="tipLozinke" matInput placeholder="Lozinka" ngModel name="lozinka" required minlength="8" #lozinkaInput="ngModel">
+            <button matSuffix mat-icon-button (click)="sakrijLozinku()">
+                <mat-icon>{{vidljivost}}</mat-icon>
+            </button>
+            <mat-hint align="end">{{lozinkaInput.value?.length}}/8</mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Datum rođenja" [matDatepicker]="picker" ngModel name="datumRodjenja" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Registruj se</button>
+        <a routerLink="/uslovi-koriscenja">Uslovi korišćenja</a>
+        <mat-checkbox color="primary" ngModel name="usloviKoriscenja" required>Prihvatam uslove korišćenja</mat-checkbox>
+    </form>
+</section>

@@ -1,0 +1,94 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav opened="false">
+        <mat-nav-list >
+            <a *ngIf="!ulogovan" mat-list-item routerLink="/prijava" (click)="sidenav.close()">
+                <mat-icon>input</mat-icon>
+                Prijavite se
+            </a>
+            <a *ngIf="!ulogovan" mat-list-item routerLink="/registracija" (click)="sidenav.close()">
+                <mat-icon>face</mat-icon>
+                Registrujte se
+            </a>
+            <a *ngIf="ulogovan" mat-list-item routerLink="/profil" (click)="sidenav.close()">
+                <mat-icon>person_outline</mat-icon>
+                Profil
+            </a>
+            <a *ngIf="ulogovan" mat-list-item routerLink="/pronadjite-prevoz" (click)="sidenav.close()">
+                <mat-icon>search</mat-icon>
+                Pronađite prevoz
+            </a>
+            <a *ngIf="ulogovan" mat-list-item routerLink="/ponudite-prevoz" (click)="sidenav.close()">
+                <mat-icon>add_circle_outline</mat-icon>
+                Ponudite prevoz
+            </a>
+            <a *ngIf="ulogovan" mat-list-item routerLink="/istorija" (click)="sidenav.close()">
+                <mat-icon>history</mat-icon>
+                Istorijat
+            </a>
+            <a *ngIf="ulogovan" mat-list-item routerLink="/obavestenja" (click)="sidenav.close()">
+                <mat-icon matBadge="3" matBadgePosition="above after" matBadgeColor="warn">notifications_none</mat-icon>
+                Obaveštenja
+            </a>
+            <a *ngIf="ulogovan" mat-list-item routerLink="/" (click)="sidenav.close()">
+                <mat-icon>exit_to_app</mat-icon>
+                Odjavite se
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content fxLayout="column" fxLayoutAlign="space-between space-between">
+        <mat-toolbar color="primary">
+            <div fxHide.gt-sm>
+                <button  mat-icon-button (click)="sidenav.toggle()">
+                    <mat-icon>menu</mat-icon>
+                </button>
+            </div>
+            <div>
+                <button mat-icon-button routerLink="/">
+                    <mat-icon>home</mat-icon>
+                </button>
+            </div>
+            <div fxHide.lt-md>
+                <button *ngIf="ulogovan" mat-button routerLink="/profil">
+                    <mat-icon>person_outline</mat-icon>
+                        Profil    
+                </button>
+                <button *ngIf="ulogovan" mat-button routerLink="/pronadjite-prevoz">
+                    <mat-icon>search</mat-icon>
+                        Pronađite prevoz   
+                </button>
+                <button *ngIf="ulogovan" mat-button routerLink="/ponudite-prevoz">
+                    <mat-icon>add_circle_outline</mat-icon>
+                        Ponudite prevoz    
+                </button>
+                <button *ngIf="ulogovan" mat-button routerLink="/istorija">
+                    <mat-icon>history</mat-icon>
+                        Istorija vožnji
+                </button>
+                <button *ngIf="ulogovan" mat-button routerLink="/obavestenja">
+                    <mat-icon matBadge="3" matBadgePosition="above after" matBadgeColor="warn">notifications_none</mat-icon>
+                        Obaveštenja    
+                </button>
+            </div>
+            <div  fxFlex fxLayoutAlign="end" fxLayoutGap="30px" fxHide.lt-md>
+                <button *ngIf="!ulogovan" mat-button color="primary"><a routerLink="/registracija">Registrujte se</a></button>
+                <button *ngIf="!ulogovan" mat-raised-button color="warn"><a routerLink="/prijava">Prijavite se</a></button>
+                <button *ngIf="ulogovan" mat-raised-button color="warn"><a routerLink="/">Odjavite se</a></button>
+            </div>
+        </mat-toolbar>
+        <router-outlet></router-outlet>
+
+        <mat-toolbar color="primary" fxLayout="column">
+            <div fxLayoutAlign="center center">
+                <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>
+                <a href="https://www.facebook.com/" target="_blank"><i class="fa fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/" target="_blank"><i class="fa fa-instagram"></i></a>
+            </div>
+            <div fxLayoutAlign="center center"> 
+                <p>2020 &copy; COPYRIGHT </p>   
+            </div>
+        </mat-toolbar>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
