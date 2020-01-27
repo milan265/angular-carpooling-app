@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-prijava',
@@ -12,9 +13,10 @@ export class PrijavaComponent implements OnInit {
   sakrivenaLozinka:boolean = true;
   tipLozinke:string = "password";
 
-  constructor() { }
+  constructor(private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle("Prijava");
   }
 
   onSubmit(form: NgForm){

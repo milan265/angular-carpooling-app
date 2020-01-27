@@ -16,6 +16,7 @@ import { IstorijatComponent } from './ulogovan/istorijat/istorijat.component';
 import { ObavestenjaComponent } from './ulogovan/obavestenja/obavestenja.component';
 import { PronadjitePrevozComponent } from './ulogovan/pronadjite-prevoz/pronadjite-prevoz.component';
 import { PonuditePrevozComponent } from './ulogovan/ponudite-prevoz/ponudite-prevoz.component';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import { PonuditePrevozComponent } from './ulogovan/ponudite-prevoz/ponudite-pre
     FlexLayoutModule,
     FormsModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

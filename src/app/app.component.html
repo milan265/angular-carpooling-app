@@ -29,7 +29,7 @@
                 <mat-icon matBadge="3" matBadgePosition="above after" matBadgeColor="warn">notifications_none</mat-icon>
                 Obaveštenja
             </a>
-            <a *ngIf="ulogovan" mat-list-item routerLink="/" (click)="sidenav.close()">
+            <a *ngIf="ulogovan" mat-list-item routerLink="/" (click)="sidenav.close(); odjaviSe()">
                 <mat-icon>exit_to_app</mat-icon>
                 Odjavite se
             </a>
@@ -64,15 +64,15 @@
                     <mat-icon>history</mat-icon>
                         Istorija vožnji
                 </button>
-                <button *ngIf="ulogovan" mat-button routerLink="/obavestenja">
+                <button *ngIf="ulogovan" mat-button routerLink="/obavestenja" >
                     <mat-icon matBadge="3" matBadgePosition="above after" matBadgeColor="warn">notifications_none</mat-icon>
                         Obaveštenja    
                 </button>
             </div>
             <div  fxFlex fxLayoutAlign="end" fxLayoutGap="30px" fxHide.lt-md>
                 <button *ngIf="!ulogovan" mat-button color="primary"><a routerLink="/registracija">Registrujte se</a></button>
-                <button *ngIf="!ulogovan" mat-raised-button color="warn"><a routerLink="/prijava">Prijavite se</a></button>
-                <button *ngIf="ulogovan" mat-raised-button color="warn"><a routerLink="/">Odjavite se</a></button>
+                <button *ngIf="!ulogovan" mat-raised-button color="warn" (click)="prijaviSe()"><a routerLink="/prijava">Prijavite se</a></button>
+                <button *ngIf="ulogovan" mat-raised-button color="warn" routerLink="/" (click)="odjaviSe()">Odjavite se</button>
             </div>
         </mat-toolbar>
         <router-outlet></router-outlet>

@@ -6,7 +6,8 @@ import { MatButtonModule, MatIconModule, MatFormFieldModule,
     MatToolbarModule,
     MatListModule,
     MatDialogModule,
-    MatBadgeModule} from '@angular/material';
+    MatBadgeModule,
+    MatRadioModule} from '@angular/material';
 
 @NgModule ({
     imports:[
@@ -21,7 +22,8 @@ import { MatButtonModule, MatIconModule, MatFormFieldModule,
         MatToolbarModule,
         MatListModule,
         MatDialogModule,
-        MatBadgeModule
+        MatBadgeModule,
+        MatRadioModule
     ],
     exports:[
         MatButtonModule,
@@ -35,7 +37,8 @@ import { MatButtonModule, MatIconModule, MatFormFieldModule,
         MatToolbarModule,
         MatListModule,
         MatDialogModule,
-        MatBadgeModule
+        MatBadgeModule,
+        MatRadioModule
     ]
 })
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-registracija',
@@ -12,9 +13,10 @@ export class RegistracijaComponent implements OnInit {
   sakrivenaLozinka:boolean = true;
   tipLozinke:string = "password";
 
-  constructor() { }
+  constructor(private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle("Registracija");
   }
 
   onSubmit(form : NgForm){

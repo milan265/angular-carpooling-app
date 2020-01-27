@@ -23,6 +23,10 @@
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
+        <mat-radio-group ngModel name="tip"required fxLayoutGap="20px">
+            <mat-radio-button value="1">Putnik</mat-radio-button>
+            <mat-radio-button value="2">Vozač</mat-radio-button>
+          </mat-radio-group>
         <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Registruj se</button>
         <a routerLink="/uslovi-koriscenja">Uslovi korišćenja</a>
         <mat-checkbox color="primary" ngModel name="usloviKoriscenja" required>Prihvatam uslove korišćenja</mat-checkbox>

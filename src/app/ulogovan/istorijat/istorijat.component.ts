@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-istorijat',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IstorijatComponent implements OnInit {
 
-  constructor() { }
+  constructor(private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle("Istorija vožnji");
   }
 
 }
