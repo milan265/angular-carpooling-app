@@ -17,6 +17,9 @@ import { ObavestenjaComponent } from './ulogovan/obavestenja/obavestenja.compone
 import { PronadjitePrevozComponent } from './ulogovan/pronadjite-prevoz/pronadjite-prevoz.component';
 import { PonuditePrevozComponent } from './ulogovan/ponudite-prevoz/ponudite-prevoz.component';
 import { CookieService } from 'ngx-cookie-service';
+import { KorisnikService } from './auth/korisnik.service';
+import { Page404Component } from './page404/page404.component';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 
 
 @NgModule({
@@ -30,7 +33,8 @@ import { CookieService } from 'ngx-cookie-service';
     IstorijatComponent,
     ObavestenjaComponent,
     PronadjitePrevozComponent,
-    PonuditePrevozComponent
+    PonuditePrevozComponent,
+    Page404Component
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,8 @@ import { CookieService } from 'ngx-cookie-service';
     FlexLayoutModule,
     FormsModule
   ],
-  providers: [CookieService],
+  providers: [CookieService,KorisnikService,
+    {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

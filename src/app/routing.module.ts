@@ -9,6 +9,7 @@ import { PonuditePrevozComponent } from './ulogovan/ponudite-prevoz/ponudite-pre
 import { PronadjitePrevozComponent } from './ulogovan/pronadjite-prevoz/pronadjite-prevoz.component';
 import { IstorijatComponent } from './ulogovan/istorijat/istorijat.component';
 import { ObavestenjaComponent } from './ulogovan/obavestenja/obavestenja.component';
+import { Page404Component } from './page404/page404.component';
 
 const rute: Routes = [
     {path: '', component: PocetnaComponent},
@@ -19,7 +20,8 @@ const rute: Routes = [
     {path: 'ponudite-prevoz', component: PonuditePrevozComponent},    
     {path: 'pronadjite-prevoz', component: PronadjitePrevozComponent},
     {path: 'istorija', component: IstorijatComponent},
-    {path: 'obavestenja', component: ObavestenjaComponent}
+    {path: 'obavestenja', component: ObavestenjaComponent},
+    {path: '404', component: Page404Component}
 ];
 
 @NgModule({

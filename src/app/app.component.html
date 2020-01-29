@@ -11,7 +11,7 @@
             </a>
             <a *ngIf="ulogovan" mat-list-item routerLink="/profil" (click)="sidenav.close()">
                 <mat-icon>person_outline</mat-icon>
-                Profil
+                {{prijavljenKorisnikIme}}
             </a>
             <a *ngIf="ulogovan" mat-list-item routerLink="/pronadjite-prevoz" (click)="sidenav.close()">
                 <mat-icon>search</mat-icon>
@@ -50,7 +50,7 @@
             <div fxHide.lt-md>
                 <button *ngIf="ulogovan" mat-button routerLink="/profil">
                     <mat-icon>person_outline</mat-icon>
-                        Profil    
+                        {{prijavljenKorisnikIme}}    
                 </button>
                 <button *ngIf="ulogovan" mat-button routerLink="/pronadjite-prevoz">
                     <mat-icon>search</mat-icon>
@@ -71,7 +71,7 @@
             </div>
             <div  fxFlex fxLayoutAlign="end" fxLayoutGap="30px" fxHide.lt-md>
                 <button *ngIf="!ulogovan" mat-button color="primary"><a routerLink="/registracija">Registrujte se</a></button>
-                <button *ngIf="!ulogovan" mat-raised-button color="warn" (click)="prijaviSe()"><a routerLink="/prijava">Prijavite se</a></button>
+                <button *ngIf="!ulogovan" mat-raised-button color="warn"><a routerLink="/prijava">Prijavite se</a></button>
                 <button *ngIf="ulogovan" mat-raised-button color="warn" routerLink="/" (click)="odjaviSe()">Odjavite se</button>
             </div>
         </mat-toolbar>

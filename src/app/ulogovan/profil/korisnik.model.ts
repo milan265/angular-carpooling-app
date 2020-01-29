@@ -1,6 +1,7 @@
 import { Ocena } from './ocena.model';
 import { Voznja } from '../istorijat/voznja.model';
 import { Poruka } from '../obavestenja/poruka.model';
+import { Automobil } from './automobil.model';
 
 export interface Korisnik{
     id: number;
@@ -9,11 +10,12 @@ export interface Korisnik{
     email: string;
     lozinka: string;
     datumRodjenja: Date;
-    tip: 'putnik' |'prevoznik'| null;
+    datumRegistrovanja: Date;
+    tip: 'putnik' |'prevoznik';
     telefon?: string;
     kratakOpis?: string;
     adresa?: string;
-    automobil?:string;
+    automobil?:Automobil;
     ocena?: Array<Ocena>;
     voznje?: Array<Voznja>;
     poruke?: Array<Poruka>;
