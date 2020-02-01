@@ -29,15 +29,20 @@ export class RegistracijaComponent implements OnInit {
   }
 
   onSubmit(form : NgForm){
-    if(!this.korisnikService.isKorisnikPostoji(form.value.email)){
+    let email: string = form.value.email;
+    if(!this.korisnikService.isKorisnikPostoji(email)){
       this.korisnikService.registrujKorisnika(form.value.ime, 
         form.value.prezime,
-        form.value.email,
+        email,
         form.value.lozinka,
         form.value.datumRodjenja,
         form.value.tip
         );
-        this.appComponent.prijavljenKorisnikIme = this.korisnikService.getImeByEmail(form.value.email);
+        this.appComponent.prijavljenKorisnikIme = this.korisnikService.getImeByEmail(email);
+        this.cookieService.set('prijavljenKorisnikIme',this.appComponent.prijavljenKorisnikIme);
+        this.appComponent.tipKorisnika = this.korisnikService.getTipByEmail(email);
+        this.cookieService.set('tipKorisnika',this.appComponent.tipKorisnika);
+        this.cookieService.set('korisnikEmail', email);
         this.cookieService.set('ulogovan','true');
         this.appComponent.ulogovan = true;
         this.router.navigate(['']);

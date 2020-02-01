@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router, NavigationStart } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { KorisnikService } from './auth/korisnik.service';
 
 @Component({
   selector: 'app-root',
@@ -12,15 +13,19 @@ export class AppComponent implements OnInit{
 
   greska404: boolean = false;
   ulogovan: boolean;
-  rutePrijavljen: Array<string> = ["/","/profil","/pronadjite-prevoz","/ponudite-prevoz","/istorija","/obavestenja","/uslovi-koriscenja"];
+  rutePrijavljen: Array<string> = ["/","/profil","/pronadjite-prevoz","/ponudite-prevoz","/voznje","/obavestenja","/uslovi-koriscenja"];
   ruteNijePrijavljen: Array<string> =["/","/registracija","/prijava","/uslovi-koriscenja"];
-  sveRute: Array<string> = ["/","/profil","/pronadjite-prevoz","/ponudite-prevoz","/istorija","/obavestenja",
+  sveRute: Array<string> = ["/","/profil","/pronadjite-prevoz","/ponudite-prevoz","/voznje","/obavestenja",
                             "/registracija","/prijava","/uslovi-koriscenja"];
 
 
   prijavljenKorisnikIme: string;
+  tipKorisnika: string= 'prevoznik';
+  brojObavestenja: number = 3;
 
-  constructor (private cookieService: CookieService, private router: Router, private snackBar: MatSnackBar) {}
+
+  constructor (private cookieService: CookieService, private router: Router, private snackBar: MatSnackBar,
+              private korisnikService: KorisnikService) {}
 
   async ngOnInit(){
     if(this.cookieService.check('ulogovan')){
@@ -29,6 +34,13 @@ export class AppComponent implements OnInit{
       }else{
         this.ulogovan = false;
       }
+      /*this.prijavljenKorisnikIme = this.cookieService.get('prijavljenKorisnikIme');
+      this.tipKorisnika = this.cookieService.get('tipKorisnika');*///ovo bi moglo kad bi se podaci cuvali u bazi
+      let email:string = this.cookieService.get('korisnikEmail');
+      this.prijavljenKorisnikIme = this.korisnikService.getImeByEmail(email);
+      this.tipKorisnika = this.korisnikService.getTipByEmail(email);
+      this.cookieService.set('prijavljenKorisnikIme',this.prijavljenKorisnikIme);
+      this.cookieService.set('tipKorisnika',this.tipKorisnika);
     }else{
       this.cookieService.set( 'ulogovan', 'false');
       this.ulogovan = false;
@@ -56,9 +68,12 @@ export class AppComponent implements OnInit{
     }
   }
 
-  odjaviSe(){
+  odjaviSe():void{
     this.prijavljenKorisnikIme = "";
     this.cookieService.set('ulogovan', 'false');
+    this.cookieService.set('prijavljenKorisnikIme',"");
+    this.cookieService.set('tipKorisnika',"");
+    this.cookieService.set('korisnikEmail',"");
     this.ulogovan = false;
     this.snackBar.open("Odjavili ste se");
   }

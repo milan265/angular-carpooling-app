@@ -12,7 +12,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import { UsloviKoriscenjaComponent } from './auth/registracija/uslovi-koriscenja/uslovi-koriscenja.component';
 import { ProfilComponent } from './ulogovan/profil/profil.component';
-import { IstorijatComponent } from './ulogovan/istorijat/istorijat.component';
 import { ObavestenjaComponent } from './ulogovan/obavestenja/obavestenja.component';
 import { PronadjitePrevozComponent } from './ulogovan/pronadjite-prevoz/pronadjite-prevoz.component';
 import { PonuditePrevozComponent } from './ulogovan/ponudite-prevoz/ponudite-prevoz.component';
@@ -20,6 +19,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { KorisnikService } from './auth/korisnik.service';
 import { Page404Component } from './page404/page404.component';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
+import { VoznjeComponent } from './ulogovan/voznje/voznje.component';
+import { AktivneComponent } from './ulogovan/voznje/aktivne/aktivne.component';
+import { IstorijatComponent } from './ulogovan/voznje/istorijat/istorijat.component';
+import { VoznjaService } from './ulogovan/voznje/voznja.service';
 
 
 @NgModule({
@@ -30,11 +33,13 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
     RegistracijaComponent,
     UsloviKoriscenjaComponent,
     ProfilComponent,
-    IstorijatComponent,
     ObavestenjaComponent,
     PronadjitePrevozComponent,
     PonuditePrevozComponent,
-    Page404Component
+    Page404Component,
+    VoznjeComponent,
+    AktivneComponent,
+    IstorijatComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +49,7 @@ import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
     FlexLayoutModule,
     FormsModule
   ],
-  providers: [CookieService,KorisnikService,
+  providers: [CookieService,KorisnikService,VoznjaService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}}],
   bootstrap: [AppComponent]
 })

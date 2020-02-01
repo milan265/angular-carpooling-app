@@ -6,3 +6,6 @@ html, body{
     height: 100%;
     margin:0px;
 }
+.mainHeight{
+    min-height: 75vh;
+}

@@ -7,9 +7,9 @@ import { UsloviKoriscenjaComponent } from './auth/registracija/uslovi-koriscenja
 import { ProfilComponent } from './ulogovan/profil/profil.component';
 import { PonuditePrevozComponent } from './ulogovan/ponudite-prevoz/ponudite-prevoz.component';
 import { PronadjitePrevozComponent } from './ulogovan/pronadjite-prevoz/pronadjite-prevoz.component';
-import { IstorijatComponent } from './ulogovan/istorijat/istorijat.component';
 import { ObavestenjaComponent } from './ulogovan/obavestenja/obavestenja.component';
 import { Page404Component } from './page404/page404.component';
+import { VoznjeComponent } from './ulogovan/voznje/voznje.component';
 
 const rute: Routes = [
     {path: '', component: PocetnaComponent},
@@ -19,7 +19,7 @@ const rute: Routes = [
     {path: 'profil', component: ProfilComponent},
     {path: 'ponudite-prevoz', component: PonuditePrevozComponent},    
     {path: 'pronadjite-prevoz', component: PronadjitePrevozComponent},
-    {path: 'istorija', component: IstorijatComponent},
+    {path: 'voznje', component: VoznjeComponent},
     {path: 'obavestenja', component: ObavestenjaComponent},
     {path: '404', component: Page404Component}
 ];

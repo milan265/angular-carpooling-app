@@ -1,5 +1,3 @@
-import { Korisnik } from '../profil/korisnik.model';
-
 export interface Voznja{
     id: number;
     naziv: string;
@@ -8,8 +6,8 @@ export interface Voznja{
     stajalista: Array<string>;
     vremePolaska: string;
     vremeDolaska: string;
-    prevoznik: Korisnik;
-    putnici: Array<Korisnik>;
+    prevoznik: number;// korisnik id
+    putnici: Array<number>;//niz korisnika id
     brojSlobodnihMesta: number;
     status: 'završena' | 'tekuća' | 'otkazana';
 }

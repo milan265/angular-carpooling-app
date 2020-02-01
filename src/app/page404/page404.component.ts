@@ -11,7 +11,7 @@ export class Page404Component implements OnInit {
   constructor(private titleService: Title) { }
 
   ngOnInit() {
-    this.titleService.setTitle("404");
+    this.titleService.setTitle("Stranica nije pronađena");
   }
 
 }

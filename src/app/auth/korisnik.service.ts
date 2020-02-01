@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Korisnik } from '../ulogovan/profil/korisnik.model';
+import { Automobil } from '../ulogovan/profil/automobil.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,14 @@ export class KorisnikService {
       lozinka: "milan123",
       datumRodjenja: new Date("1994-05-26"),
       datumRegistrovanja: new Date("2020-01-23"),
-      tip: "putnik"
+      tip: "putnik",
+      automobil: {
+        registarskaOznaka: "",
+        marka: "",
+        model: "",
+        godiste: null,
+        boja: ""
+      }
     },
     {
       id: 2,
@@ -42,7 +50,14 @@ export class KorisnikService {
       lozinka: "milica123",
       datumRodjenja: new Date("1997-06-14"),
       datumRegistrovanja: new Date("2020-01-24"),
-      tip: "putnik"
+      tip: "putnik",
+      automobil: {
+        registarskaOznaka: "",
+        marka: "",
+        model: "",
+        godiste: null,
+        boja: ""
+      }
     },
     {
       id: 4,
@@ -52,7 +67,14 @@ export class KorisnikService {
       lozinka: "mika12345",
       datumRodjenja: new Date("1998-11-22"),
       datumRegistrovanja: new Date("2020-01-25"),
-      tip: "putnik"
+      tip: "putnik",
+      automobil: {
+        registarskaOznaka: "",
+        marka: "",
+        model: "",
+        godiste: null,
+        boja: ""
+      }
     },
     {
       id: 5,
@@ -95,6 +117,46 @@ export class KorisnikService {
     return ime;
   }
 
+  getTipByEmail(email:string):string{
+    let tip:string;
+    KorisnikService.korisnikPodaci.forEach(korisnik=>{
+      if(korisnik.email == email){
+        tip = korisnik.tip;
+      }
+    });
+    return tip;
+  }
+
+  getKorisnikByEmail(email:string):Korisnik{
+    return KorisnikService.korisnikPodaci.find(korisnik=>korisnik.email == email);
+  }
+
+  setKorisnikById(id:number, ime:string, prezime:string, lozinka:string, datumRodjenja:Date, tip: 'putnik' |'prevoznik',
+          telefon?:string, adresa?:string, kratakOpis?:string, automobil?:Automobil):void{
+      KorisnikService.korisnikPodaci.forEach(korisnik=>{
+        if(korisnik.id == id){
+          korisnik.ime = ime;
+          korisnik.prezime = prezime;
+          korisnik.lozinka = lozinka;
+          korisnik.datumRodjenja = datumRodjenja;
+          korisnik.tip = tip;
+          if(telefon!=undefined){
+            korisnik.telefon = telefon;
+          }
+          if(adresa!=undefined){
+            korisnik.adresa = adresa;
+          }
+          if(kratakOpis!=undefined){
+            korisnik.kratakOpis = kratakOpis;
+          }
+          if(korisnik.tip == 'prevoznik'){
+            korisnik.automobil = automobil;
+          }
+        }
+      });
+  }
+
+
   registrujKorisnika(ime:string, prezime:string, email:string, lozinka:string, datumRodjenja:Date, tip:'putnik' |'prevoznik'):void{
     let maxId: number = 0;
     KorisnikService.korisnikPodaci.forEach(
@@ -106,7 +168,14 @@ export class KorisnikService {
     );
     let id = ++maxId;
     let datumRegistrovanja: Date = new Date();
-    let korisnik: Korisnik = {id, ime, prezime, email, lozinka, datumRodjenja, datumRegistrovanja, tip};
+    let automobil: Automobil = {
+      registarskaOznaka: "",
+      marka: "",
+      model: "",
+      godiste: null,
+      boja: ""
+    };
+    let korisnik: Korisnik = {id, ime, prezime, email, lozinka, datumRodjenja, datumRegistrovanja, tip, automobil};
     KorisnikService.korisnikPodaci.push(korisnik);
   }
 }

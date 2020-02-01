@@ -1,0 +1,28 @@
+section{
+    margin-bottom: 50px;
+}
+form{
+    margin: 100px auto;
+    padding: 20px;
+    width: max-content;
+    border: 1px solid darkgrey;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+#edit{
+    width: 300px;
+}
+form div button:hover{
+    background-color: lightgray;
+}
+mat-form-field{
+    width: 100%;
+}
+mat-card{
+    width: 300px;
+    background-color: #fefefe;
+}
+mat-card-subtitle{
+    margin-bottom: 3vh;
+    font-size: 0.75em;
+}

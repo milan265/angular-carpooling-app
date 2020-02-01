@@ -13,20 +13,21 @@
                 <mat-icon>person_outline</mat-icon>
                 {{prijavljenKorisnikIme}}
             </a>
-            <a *ngIf="ulogovan" mat-list-item routerLink="/pronadjite-prevoz" (click)="sidenav.close()">
+            <a *ngIf="ulogovan && tipKorisnika=='putnik'" mat-list-item routerLink="/pronadjite-prevoz" (click)="sidenav.close()">
                 <mat-icon>search</mat-icon>
                 Pronađite prevoz
             </a>
-            <a *ngIf="ulogovan" mat-list-item routerLink="/ponudite-prevoz" (click)="sidenav.close()">
+            <a *ngIf="ulogovan && tipKorisnika=='prevoznik'" mat-list-item routerLink="/ponudite-prevoz" (click)="sidenav.close()">
                 <mat-icon>add_circle_outline</mat-icon>
                 Ponudite prevoz
             </a>
-            <a *ngIf="ulogovan" mat-list-item routerLink="/istorija" (click)="sidenav.close()">
-                <mat-icon>history</mat-icon>
-                Istorijat
+            <a *ngIf="ulogovan" mat-list-item routerLink="/voznje" (click)="sidenav.close()">
+                <mat-icon>directions_car</mat-icon>
+                Vožnje
             </a>
             <a *ngIf="ulogovan" mat-list-item routerLink="/obavestenja" (click)="sidenav.close()">
-                <mat-icon matBadge="3" matBadgePosition="above after" matBadgeColor="warn">notifications_none</mat-icon>
+                <mat-icon *ngIf="brojObavestenja>0"matBadge="{{brojObavestenja}}" matBadgePosition="above after" matBadgeColor="warn">notifications_none</mat-icon>
+                <mat-icon *ngIf="brojObavestenja==0">notifications_none</mat-icon>
                 Obaveštenja
             </a>
             <a *ngIf="ulogovan" mat-list-item routerLink="/" (click)="sidenav.close(); odjaviSe()">
@@ -35,7 +36,7 @@
             </a>
         </mat-nav-list>
     </mat-sidenav>
-    <mat-sidenav-content fxLayout="column" fxLayoutAlign="space-between space-between">
+    <mat-sidenav-content fxLayout="column">
         <mat-toolbar color="primary">
             <div fxHide.gt-sm>
                 <button  mat-icon-button (click)="sidenav.toggle()">
@@ -52,20 +53,21 @@
                     <mat-icon>person_outline</mat-icon>
                         {{prijavljenKorisnikIme}}    
                 </button>
-                <button *ngIf="ulogovan" mat-button routerLink="/pronadjite-prevoz">
+                <button *ngIf="ulogovan && tipKorisnika=='putnik'" mat-button routerLink="/pronadjite-prevoz">
                     <mat-icon>search</mat-icon>
                         Pronađite prevoz   
                 </button>
-                <button *ngIf="ulogovan" mat-button routerLink="/ponudite-prevoz">
+                <button *ngIf="ulogovan && tipKorisnika=='prevoznik'" mat-button routerLink="/ponudite-prevoz">
                     <mat-icon>add_circle_outline</mat-icon>
                         Ponudite prevoz    
                 </button>
-                <button *ngIf="ulogovan" mat-button routerLink="/istorija">
-                    <mat-icon>history</mat-icon>
-                        Istorija vožnji
+                <button *ngIf="ulogovan" mat-button routerLink="/voznje">
+                    <mat-icon>directions_car</mat-icon>
+                        Vožnje
                 </button>
                 <button *ngIf="ulogovan" mat-button routerLink="/obavestenja" >
-                    <mat-icon matBadge="3" matBadgePosition="above after" matBadgeColor="warn">notifications_none</mat-icon>
+                    <mat-icon *ngIf="brojObavestenja>0"matBadge="{{brojObavestenja}}" matBadgePosition="above after" matBadgeColor="warn">notifications_none</mat-icon>
+                    <mat-icon *ngIf="brojObavestenja==0">notifications_none</mat-icon>
                         Obaveštenja    
                 </button>
             </div>
@@ -75,8 +77,9 @@
                 <button *ngIf="ulogovan" mat-raised-button color="warn" routerLink="/" (click)="odjaviSe()">Odjavite se</button>
             </div>
         </mat-toolbar>
+        
         <router-outlet></router-outlet>
-
+      
         <mat-toolbar color="primary" fxLayout="column">
             <div fxLayoutAlign="center center">
                 <a href="https://twitter.com/" target="_blank"><i class="fa fa-twitter"></i></a>

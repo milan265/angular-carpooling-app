@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-istorijat',
-  templateUrl: './istorijat.component.html',
-  styleUrls: ['./istorijat.component.css']
+  selector: 'app-voznje',
+  templateUrl: './voznje.component.html',
+  styleUrls: ['./voznje.component.css']
 })
-export class IstorijatComponent implements OnInit {
+export class VoznjeComponent implements OnInit {
 
   constructor(private titleService: Title) { }
 

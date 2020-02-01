@@ -1,1 +1,198 @@
-<p>profil works!</p>
+<section class="mainHeight">
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div id="edit" fxLayoutAlign="end center">
+            <button type="button" mat-icon-button (click)="promena=!promena">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+        <mat-card>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div fxLayout="column" *ngIf="!promena">
+                    <mat-card-subtitle>Ime</mat-card-subtitle>
+                    <span>{{korisnik.ime}}</span>
+                </div>
+                <mat-form-field *ngIf="promena">
+                    <input type="text" matInput placeholder="Ime" ngModel name="ime" 
+                    [(ngModel)]="korisnik.ime" required>
+                </mat-form-field>
+            </div>
+        </mat-card>
+        <mat-card>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div fxLayout="column" *ngIf="!promena">
+                    <mat-card-subtitle>Prezime</mat-card-subtitle>
+                    <span>{{korisnik.prezime}}</span>
+                </div>
+                <mat-form-field *ngIf="promena">
+                    <input type="text" matInput placeholder="Prezime" ngModel name="prezime" 
+                    [(ngModel)]="korisnik.prezime" required>
+                </mat-form-field>
+            </div>
+        </mat-card> 
+        <mat-card *ngIf="!promena">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div fxLayout="column">
+                    <mat-card-subtitle>Email</mat-card-subtitle>
+                    <span>{{korisnik.email}}</span>
+                </div>
+            </div>
+        </mat-card> 
+
+        <mat-card *ngIf="promena">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <mat-form-field>
+                    <input [type]="tipLozinke" matInput placeholder="Lozinka" ngModel name="lozinka" 
+                        [(ngModel)]="korisnik.lozinka" required minlength="8" #lozinkaInput="ngModel">
+                    <button type="button" matSuffix mat-icon-button (click)="sakrijLozinku()">
+                        <mat-icon>{{vidljivost}}</mat-icon>
+                    </button>
+                    <mat-hint align="end">{{lozinkaInput.value?.length}}/8</mat-hint>
+                </mat-form-field>
+            </div>
+        </mat-card>
+
+        <mat-card>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div fxLayout="column" *ngIf="!promena">
+                    <mat-card-subtitle>Broj telefona</mat-card-subtitle>
+                    <span>{{korisnik.telefon}}</span>
+                </div>
+                <mat-form-field *ngIf="promena">
+                    <input type="text" matInput placeholder="Broj telefona" ngModel name="telefon"
+                        [(ngModel)]="korisnik.telefon">
+                </mat-form-field>
+            </div>
+        </mat-card>
+
+        <mat-card>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div fxLayout="column" *ngIf="!promena">
+                    <mat-card-subtitle>Adresa</mat-card-subtitle>
+                    <span>{{korisnik.adresa}}</span>
+                </div>
+                <mat-form-field *ngIf="promena">
+                    <input type="text" matInput placeholder="Adresa" ngModel name="adresa"
+                    [(ngModel)]="korisnik.adresa">
+                </mat-form-field>
+            </div>
+        </mat-card>
+ 
+        <mat-card>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div fxLayout="column" *ngIf="!promena">
+                    <mat-card-subtitle>Datum rođenja</mat-card-subtitle>
+                    <span>{{korisnik.datumRodjenja.toLocaleDateString()}}</span>
+                </div>
+                <mat-form-field *ngIf="promena">
+                    <input matInput placeholder="Datum rođenja" [matDatepicker]="picker" 
+                    [(ngModel)]="korisnik.datumRodjenja" ngModel name="datumRodjenja" required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </mat-card> 
+
+        <mat-card>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div fxLayout="column" *ngIf="!promena">
+                    <mat-card-subtitle>Tip korisnika</mat-card-subtitle>
+                    <span>{{korisnik.tip}}</span>
+                </div>
+                <div *ngIf="promena">
+                    <mat-card-subtitle>Tip korisnika</mat-card-subtitle>
+                    <mat-radio-group ngModel name="tip" [(ngModel)]="korisnik.tip" required fxLayoutGap="20px">
+                        <mat-radio-button value="putnik">Putnik</mat-radio-button>
+                        <mat-radio-button value="prevoznik">Prevoznik</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            </div>
+        </mat-card>
+
+        <mat-card *ngIf="korisnik.tip=='prevoznik'">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div fxLayout="column" *ngIf="!promena">
+                    <mat-card-subtitle>Marka automobila</mat-card-subtitle>
+                    <span>{{korisnik.automobil.marka}}</span>
+                </div>
+                <mat-form-field *ngIf="promena">
+                    <input type="text" matInput placeholder="Marka automobila" ngModel name="automobilMarka"
+                    [(ngModel)]="korisnik.automobil.marka" required>
+                </mat-form-field>
+            </div>
+        </mat-card>
+        <mat-card *ngIf="korisnik.tip=='prevoznik'">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div fxLayout="column" *ngIf="!promena">
+                    <mat-card-subtitle>Model automobila</mat-card-subtitle>
+                    <span>{{korisnik.automobil.model}}</span>
+                </div>
+                <mat-form-field *ngIf="promena">
+                    <input type="text" matInput placeholder="Model automobila" ngModel name="automobilModel"
+                    [(ngModel)]="korisnik.automobil.model" required>
+                </mat-form-field>
+            </div>
+        </mat-card>
+        <mat-card *ngIf="korisnik.tip=='prevoznik'">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div fxLayout="column" *ngIf="!promena">
+                    <mat-card-subtitle>Registarska oznaka</mat-card-subtitle>
+                    <span>{{korisnik.automobil.registarskaOznaka}}</span>
+                </div>
+                <mat-form-field *ngIf="promena">
+                    <input type="text" matInput placeholder="Registarska oznaka" ngModel name="automobilRegistarskaOznaka"
+                    [(ngModel)]="korisnik.automobil.registarskaOznaka" required>
+                </mat-form-field>
+            </div>
+        </mat-card>
+        
+        <mat-card *ngIf="korisnik.tip=='prevoznik'">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div fxLayout="column" *ngIf="!promena">
+                    <mat-card-subtitle>Godište automobila</mat-card-subtitle>
+                    <span>{{korisnik.automobil.godiste}}</span>
+                </div>
+                <mat-form-field *ngIf="promena">
+                    <input type="text" matInput placeholder="Godište automobila" ngModel name="automobilGodiste"
+                    [(ngModel)]="korisnik.automobil.godiste" required>
+                </mat-form-field>
+            </div>
+        </mat-card>
+        
+        <mat-card *ngIf="korisnik.tip=='prevoznik'">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div fxLayout="column" *ngIf="!promena">
+                    <mat-card-subtitle>Boja automobila</mat-card-subtitle>
+                    <span>{{korisnik.automobil.boja}}</span>
+                </div>
+                <mat-form-field *ngIf="promena">
+                    <input type="text" matInput placeholder="Boja automobila" ngModel name="automobilBoja"
+                    [(ngModel)]="korisnik.automobil.boja" required>
+                </mat-form-field>
+            </div>
+        </mat-card>
+
+        <mat-card *ngIf="!promena">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div fxLayout="column">
+                    <mat-card-subtitle>Datum registrovanja</mat-card-subtitle>
+                    <span>{{korisnik.datumRegistrovanja.toLocaleDateString()}}</span>
+                </div>
+            </div>
+        </mat-card>
+        
+        <mat-card>
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div fxLayout="column" *ngIf="!promena">
+                    <mat-card-subtitle>Mini biografija</mat-card-subtitle>
+                    <span>{{korisnik.kratakOpis}}</span>
+                </div>
+                <mat-form-field *ngIf="promena">
+                    <textarea matInput placeholder="Mini biografija" ngModel name="kratakOpis"
+                    [(ngModel)]="korisnik.kratakOpis"></textarea>
+                </mat-form-field>
+            </div>
+        </mat-card>
+
+        <button *ngIf="promena" mat-raised-button type="submit" color="primary" [disabled]="f.invalid">Sačuvajte promene</button>
+    </form>
+</section>

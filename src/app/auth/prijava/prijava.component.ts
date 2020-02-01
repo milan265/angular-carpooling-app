@@ -29,14 +29,20 @@ export class PrijavaComponent implements OnInit {
   }
 
   onSubmit(form: NgForm){
-    if(!this.korisnikService.isLozinkaDobra(form.value.email, form.value.lozinka)){
+    let email: string = form.value.email;
+    let lozinka: string = form.value.lozinka;
+    if(!this.korisnikService.isLozinkaDobra(email, lozinka)){
       this.greska = true;
       this.greskaPoruka = "Korisnik sa unetim podacima ne postoji.";
       return
     }
     this.greska = false;
-    this.appComponent.prijavljenKorisnikIme = this.korisnikService.getImeByEmail(form.value.email);
+    this.appComponent.prijavljenKorisnikIme = this.korisnikService.getImeByEmail(email);
+    this.cookieService.set('prijavljenKorisnikIme',this.appComponent.prijavljenKorisnikIme);
     this.cookieService.set('ulogovan','true');
+    this.cookieService.set('korisnikEmail', email);
+    this.appComponent.tipKorisnika = this.korisnikService.getTipByEmail(email);
+    this.cookieService.set('tipKorisnika',this.appComponent.tipKorisnika);
     this.appComponent.ulogovan = true;
     this.router.navigate(['']);
     this.snackBar.open("Prijavljeni ste");
