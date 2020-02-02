@@ -1,10 +1,13 @@
 <section class="mainHeight">
-    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div fxHide.lt-md fxFlex="40"></div>
+    <form fxFlex="80" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <mat-form-field>
-            <input type="text" matInput placeholder="Ime" ngModel name="ime" required>
+            <input type="text" matInput placeholder="Ime" ngModel name="ime" #ime="ngModel" required>
+            <mat-error *ngIf="ime.hasError('required')">Polje mora biti popunjeno</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input type="text" matInput placeholder="Prezime" ngModel name="prezime" required>
+            <input type="text" matInput placeholder="Prezime" ngModel name="prezime" #prezime="ngModel" required>
+            <mat-error *ngIf="prezime.hasError('required')">Polje mora biti popunjeno</mat-error>
         </mat-form-field>
         <mat-form-field>
             <input type="email" matInput placeholder="E-mail" ngModel name="email" email required #emailInput="ngModel">
@@ -19,9 +22,10 @@
             <mat-hint align="end">{{lozinkaInput.value?.length}}/8</mat-hint>
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Datum rođenja" [matDatepicker]="picker" ngModel name="datumRodjenja" required>
+            <input matInput placeholder="Datum rođenja" [matDatepicker]="picker" #datum="ngModel" ngModel name="datumRodjenja" required>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="datum.hasError('required')">Polje mora biti popunjeno</mat-error>
         </mat-form-field>
         <mat-radio-group ngModel name="tip"required fxLayoutGap="20px">
             <mat-radio-button value="putnik">Putnik</mat-radio-button>
@@ -35,4 +39,5 @@
         <a routerLink="/uslovi-koriscenja">Uslovi korišćenja</a>
         <mat-checkbox color="primary" ngModel name="usloviKoriscenja" required>Prihvatam uslove korišćenja</mat-checkbox>
     </form>
+    <div fxHide.lt-md fxFlex="40"></div>
 </section>

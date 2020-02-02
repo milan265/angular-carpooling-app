@@ -9,7 +9,7 @@ import { MaterialModule } from './material.module';
 import { RoutingModule } from './routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsloviKoriscenjaComponent } from './auth/registracija/uslovi-koriscenja/uslovi-koriscenja.component';
 import { ProfilComponent } from './ulogovan/profil/profil.component';
 import { ObavestenjaComponent } from './ulogovan/obavestenja/obavestenja.component';
@@ -47,7 +47,8 @@ import { VoznjaService } from './ulogovan/voznje/voznja.service';
     RoutingModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [CookieService,KorisnikService,VoznjaService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}}],

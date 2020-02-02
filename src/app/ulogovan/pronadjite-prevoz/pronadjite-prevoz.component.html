@@ -1,3 +1,74 @@
-<div class="mainHeight">
-    <p>pronadjite-prevoz works!</p>
-</div>
+<section class="mainHeight" fxLayoutAlign="center start">
+    <div fxHide.lt-md fxFlex="25"></div>
+    <form fxFlex="80" fxLayout="column" fxLayoutGap="30px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <mat-card fxLayout="column">
+                <div fxLayoutAlign="center center">
+                    <mat-card-title>Pronađite svoju vožnju do fakulteta </mat-card-title>
+                </div>
+                
+                <mat-card-content fxLayout="column">
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="Polazište" ngModel name="polaziste" required>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input type="text" matInput placeholder="Odredište" ngModel name="odrediste" [matAutocomplete]="auto" required>
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let odrediste of odredista" [value]="odrediste" >
+                                {{odrediste}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput placeholder="Datum polaska" [matDatepicker]="picker" ngModel name="datumPolaska" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+    
+                    <div fxLayoutAlign="space-between center">
+                        <mat-label>Vreme od</mat-label>
+                        <mat-form-field>
+                            <mat-label>Sati</mat-label>
+                            <mat-select ngModel name="satiOd" required>
+                                <mat-option *ngFor="let sat of sati" [value]="sat">
+                                    {{sat}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Minuti</mat-label>
+                            <mat-select ngModel name="minutiOd" required>
+                                <mat-option *ngFor="let minut of minuti" [value]="minut">
+                                    {{minut}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div fxLayoutAlign="space-between center">
+                        <mat-label>Vreme do</mat-label>
+                        <mat-form-field>
+                            <mat-label>Sati</mat-label>
+                            <mat-select ngModel name="satiDo" required>
+                                <mat-option *ngFor="let sat of sati" [value]="sat">
+                                    {{sat}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field>
+                            <mat-label>Minuti</mat-label>
+                            <mat-select ngModel name="minutiDo" required>
+                                <mat-option *ngFor="let minut of minuti" [value]="minut">
+                                    {{minut}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+
+            <div fxLayoutAlign="center center">
+                <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Pretraži</button>
+            </div>
+        </form>
+    
+    <div fxHide.lt-md fxFlex="25"></div>
+</section>

@@ -9,9 +9,6 @@ form{
     border-radius: 5px;
     background-color: whitesmoke;
 }
-#edit{
-    width: 300px;
-}
 form div button:hover{
     background-color: lightgray;
 }
@@ -19,10 +16,15 @@ mat-form-field{
     width: 100%;
 }
 mat-card{
-    width: 300px;
+    width: 90%;
     background-color: #fefefe;
 }
 mat-card-subtitle{
     margin-bottom: 3vh;
     font-size: 0.75em;
+}
+
+#edit{
+    width: 100%;
+    padding: 0 0.5em;
 }

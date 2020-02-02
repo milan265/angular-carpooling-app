@@ -1,13 +1,17 @@
 <section class="mainHeight">
-    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <div fxHide.lt-md fxFlex="40"></div>
+    <form fxFlex="80" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
         <mat-form-field>
-            <input type="email" matInput placeholder="E-mail" ngModel name="email" email required >
+            <input type="email" matInput placeholder="E-mail" ngModel name="email" #email="ngModel" email required >
+            <mat-error *ngIf="email.hasError('required')">Polje mora biti popunjeno</mat-error>
+            <mat-error *ngIf="!email.hasError('required')">E-mail nije u dobrom formatu</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <input [type]="tipLozinke" matInput placeholder="Lozinka" ngModel name="lozinka" required >
-            <button type="button" id="sakrij" matSuffix mat-icon-button (click)="sakrijLozinku()">
+            <input [type]="tipLozinke" matInput placeholder="Lozinka" ngModel name="lozinka" #lozinka="ngModel" required >
+            <button type="button" matSuffix mat-icon-button (click)="sakrijLozinku()">
                 <mat-icon>{{vidljivost}}</mat-icon>
             </button>
+            <mat-error *ngIf="lozinka.hasError('required')">Polje mora biti popunjeno</mat-error>
         </mat-form-field>
         <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Prijavi se</button>
         <div *ngIf="greska" fxLayout="column" fxLayoutAlign="center center">
@@ -15,4 +19,5 @@
             <a routerLink="/registracija">Registrujte se</a>
         </div>
     </form>
+    <div fxHide.lt-md fxFlex="40"></div>
 </section>

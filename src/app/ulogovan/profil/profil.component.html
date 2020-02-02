@@ -1,7 +1,9 @@
 <section class="mainHeight">
-    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
-        <div id="edit" fxLayoutAlign="end center">
-            <button type="button" mat-icon-button (click)="promena=!promena">
+    <div fxHide.lt-md fxFlex="40"></div>
+    <form fxLayout="column" fxFlex="80" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+        <div id="edit"fxLayoutAlign="space-between center">
+            <mat-card-title>Vaši lični podaci</mat-card-title>
+            <button *ngIf="!promena" type="button" mat-icon-button (click)="promena=!promena">
                 <mat-icon>edit</mat-icon>
             </button>
         </div>
@@ -195,4 +197,5 @@
 
         <button *ngIf="promena" mat-raised-button type="submit" color="primary" [disabled]="f.invalid">Sačuvajte promene</button>
     </form>
+    <div fxHide.lt-md fxFlex="40"></div>
 </section>

@@ -1,0 +1,11 @@
+form{
+    margin: 100px auto;
+    padding: 20px;
+    width: max-content;
+    border: 1px solid darkgrey;
+    border-radius: 5px;
+    background-color: whitesmoke;
+}
+mat-card{
+    margin-bottom: 3em;
+}

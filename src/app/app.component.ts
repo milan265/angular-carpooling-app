@@ -13,14 +13,15 @@ export class AppComponent implements OnInit{
 
   greska404: boolean = false;
   ulogovan: boolean;
-  rutePrijavljen: Array<string> = ["/","/profil","/pronadjite-prevoz","/ponudite-prevoz","/voznje","/obavestenja","/uslovi-koriscenja"];
+  rutePrijavljenPutnik: Array<string> = ["/","/profil","/pronadjite-prevoz",,"/voznje","/obavestenja","/uslovi-koriscenja"];
+  rutePrijavljenPrevoznik: Array<string> = ["/","/profil","/ponudite-prevoz","/voznje","/obavestenja","/uslovi-koriscenja"];
   ruteNijePrijavljen: Array<string> =["/","/registracija","/prijava","/uslovi-koriscenja"];
   sveRute: Array<string> = ["/","/profil","/pronadjite-prevoz","/ponudite-prevoz","/voznje","/obavestenja",
                             "/registracija","/prijava","/uslovi-koriscenja"];
 
 
   prijavljenKorisnikIme: string;
-  tipKorisnika: string= 'prevoznik';
+  tipKorisnika: string;
   brojObavestenja: number = 3;
 
 
@@ -49,13 +50,13 @@ export class AppComponent implements OnInit{
     await this.router.events.subscribe(event=>{
       if(event instanceof NavigationStart){
         if(this.ulogovan){
-          if(this.rutePrijavljen.find(e => e==event.url)==undefined){
-            this.greska404 = true;
+          if(this.tipKorisnika=="putnik"){
+            this.greska404 = this.rutePrijavljenPutnik.find(e => e==event.url)==undefined;
+          }else{
+            this.greska404 = this.rutePrijavljenPrevoznik.find(e => e==event.url)==undefined;
           }
         }else{
-          if(this.ruteNijePrijavljen.find(e => e==event.url)==undefined){
-            this.greska404 = true;
-          }
+          this.greska404 = this.ruteNijePrijavljen.find(e => e==event.url)==undefined;
         }
       
         if(this.sveRute.find(e => e==event.url)==undefined){

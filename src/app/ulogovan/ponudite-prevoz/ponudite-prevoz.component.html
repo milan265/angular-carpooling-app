@@ -1,3 +1,135 @@
-<div class="mainHeight">
-    <p>ponudite-prevoz works!</p>
-</div>
+<section class="mainHeight" fxLayoutAlign="center start">
+    <div fxHide.lt-md fxFlex="25"></div>
+    <mat-horizontal-stepper [linear]="true" fxFlex="80">
+        <mat-step [stepControl]="prvaFormGrupa">
+            <form [formGroup]="prvaFormGrupa" fxLayout="column" fxLayoutGap="30px">
+                <ng-template matStepLabel>Raspored</ng-template>
+                <mat-card fxLayout="column">
+                    <mat-card-title>Lokacije</mat-card-title>
+                    <mat-card-content fxLayout="column">
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Polazište" required formControlName="polaziste">
+                        </mat-form-field>
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Odredište" [matAutocomplete]="auto" required formControlName="odrediste">
+                            <mat-autocomplete #auto="matAutocomplete">
+                                <mat-option *ngFor="let odrediste of odredista" [value]="odrediste" >
+                                    {{odrediste}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                
+                        <mat-form-field>
+                            <input type="text" matInput placeholder="Stajalište 1" formControlName="stajaliste1">
+                            <button *ngIf="brojStajalista==1" type="button" matTooltip="Dodaj stajalište" matSuffix mat-icon-button (click)="dodajStajaliste()">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="brojStajalista>1">
+                            <input type="text" matInput placeholder="Stajalište 2" formControlName="stajaliste2">
+                            <button *ngIf="brojStajalista==2"type="button" matTooltip="Ukloni stajalište" matSuffix mat-icon-button (click)="ukloniStajaliste()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                            <button *ngIf="brojStajalista==2" type="button" matTooltip="Dodaj stajalište" matSuffix mat-icon-button (click)="dodajStajaliste()">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="brojStajalista==3">
+                            <input type="text" matInput placeholder="Stajalište 3" formControlName="stajaliste3">
+                            <button type="button" matTooltip="Ukloni stajalište" matSuffix mat-icon-button (click)="ukloniStajaliste()">
+                                <mat-icon>close</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+                
+                <mat-card>
+                    <mat-card-title>Datum i vreme</mat-card-title>
+                    <mat-card-content fxLayout="column">
+                        <mat-form-field>
+                            <input matInput placeholder="Datum polaska" [matDatepicker]="picker" required formControlName="datumPolaska">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+        
+                        <div fxLayoutAlign="space-between center">
+                            <mat-label>Vreme polaska</mat-label>
+                            <mat-form-field>
+                                <mat-label>Sati</mat-label>
+                                <mat-select required formControlName="vremePolaskaSat">
+                                    <mat-option *ngFor="let sat of sati" [value]="sat">
+                                        {{sat}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Minuti</mat-label>
+                                <mat-select required formControlName="vremePolaskaMinut">
+                                    <mat-option *ngFor="let minut of minuti" [value]="minut">
+                                        {{minut}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div fxLayoutAlign="space-between center">
+                            <mat-label>Vreme dolaska</mat-label>
+                            <mat-form-field>
+                                <mat-label>Sati</mat-label>
+                                <mat-select required formControlName="vremeDolaskaSat">
+                                    <mat-option *ngFor="let sat of sati" [value]="sat">
+                                        {{sat}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Minuti</mat-label>
+                                <mat-select required formControlName="vremeDolaskaMinut">
+                                    <mat-option *ngFor="let minut of minuti" [value]="minut">
+                                        {{minut}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+                               
+                <div>
+                    <button mat-stroked-button matStepperNext>Dalje</button>
+                </div>
+                
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="drugaFormGrupa">
+            <form [formGroup]="drugaFormGrupa">
+                <ng-template matStepLabel>Detalji</ng-template>
+                
+                <mat-card fxLayout="column">
+                    <mat-card-title>Broj slobodnih mesta</mat-card-title>
+                    <mat-card-content fxLayout="column">
+                        <mat-form-field>
+                            <mat-select formControlName="brojMesta">
+                                <mat-option *ngFor="let m of mesta" [value]="m">
+                                    {{m}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+                <mat-card fxLayout="column">
+                    <mat-card-title>Dodatni detalji</mat-card-title>
+                    <mat-card-content fxLayout="column">
+                        <mat-form-field>
+                            <textarea matInput placeholder="Informišite putnike o dodatnim detaljima" formControlName="detalji"></textarea>
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+
+                <div>
+                    <button mat-stroked-button matStepperPrevious>Nazad</button>
+                <button mat-raised-button color="primary" (click)="objaviVoznju()">Objavi vožnju</button>
+                </div>
+            </form>
+        </mat-step>
+    </mat-horizontal-stepper>
+    <div fxHide.lt-md fxFlex="25"></div>
+</section>
