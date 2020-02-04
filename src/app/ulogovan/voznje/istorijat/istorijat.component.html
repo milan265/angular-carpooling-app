@@ -1,1 +1,54 @@
-<p>istorijat works!</p>
+<section class="mainHeight">
+    <div *ngIf="podaciZaTabelu.data.length!=0">
+        <mat-table [dataSource]='podaciZaTabelu' matSort>
+            <ng-container matColumnDef="polaziste">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Polazište</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.polaziste}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="odrediste">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Odredište</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.odrediste}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="stajalista">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Stajališta</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.stajalista}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="datumPolaska">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Datum polaska</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.datumPolaska}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="vremePolaska">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Vreme polaska</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.polaziste}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="vremeDolaska">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Vreme dolaska</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.polaziste}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="prevoznik">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Prevoznik</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.prevoznik}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="brojSlobodnihMesta">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Broj slobodnih mesta</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.brojSlobodnihMesta}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="dodatniDetalji">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Dodatni detalji</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.dodatniDetalji}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.status}}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="datumObjave">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Datum objave</mat-header-cell>
+                <mat-cell *matCellDef="let element">{{element.datumObjave}}</mat-cell>
+            </ng-container>
+    
+            <mat-header-row *matHeaderRowDef="kolone"></mat-header-row>
+            <mat-row *matRowDef="let rows; columns: kolone;"></mat-row>
+        </mat-table>
+        <mat-paginator [pageSize]="2" [pageSizeOptions]="[2,4,6,8,10]"></mat-paginator>
+    </div>
+</section>

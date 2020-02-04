@@ -14,7 +14,10 @@ import { MatButtonModule, MatIconModule, MatFormFieldModule,
     MatStepperModule,
     MatAutocompleteModule,
     MatSelectModule,
-    MatTooltipModule} from '@angular/material';
+    MatTooltipModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule} from '@angular/material';
 
 @NgModule ({
     imports:[
@@ -37,7 +40,10 @@ import { MatButtonModule, MatIconModule, MatFormFieldModule,
         MatStepperModule,
         MatAutocompleteModule,
         MatSelectModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule
     ],
     exports:[
         MatButtonModule,
@@ -59,7 +65,10 @@ import { MatButtonModule, MatIconModule, MatFormFieldModule,
         MatStepperModule,
         MatAutocompleteModule,
         MatSelectModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatTableModule,
+        MatSortModule,
+        MatPaginatorModule
     ]
 })
 

@@ -4,7 +4,6 @@ import { Korisnik } from './korisnik.model';
 import { CookieService } from 'ngx-cookie-service';
 import { KorisnikService } from 'src/app/auth/korisnik.service';
 import { NgForm } from '@angular/forms';
-import { Automobil } from './automobil.model';
 import { AppComponent } from 'src/app/app.component';
 import { MatSnackBar } from '@angular/material';
 

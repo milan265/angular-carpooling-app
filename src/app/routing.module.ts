@@ -10,6 +10,7 @@ import { PronadjitePrevozComponent } from './ulogovan/pronadjite-prevoz/pronadji
 import { ObavestenjaComponent } from './ulogovan/obavestenja/obavestenja.component';
 import { Page404Component } from './page404/page404.component';
 import { VoznjeComponent } from './ulogovan/voznje/voznje.component';
+import { PrikazComponent } from './ulogovan/pronadjite-prevoz/prikaz/prikaz.component';
 
 const rute: Routes = [
     {path: '', component: PocetnaComponent},

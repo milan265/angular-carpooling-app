@@ -23,7 +23,8 @@ export class KorisnikService {
         model: "",
         godiste: null,
         boja: ""
-      }
+      },
+      voznje:[1,2,3,4,5,6,7,8]
     },
     {
       id: 2,
@@ -40,7 +41,8 @@ export class KorisnikService {
         model: "Astra",
         godiste: 2009,
         boja: "bela"
-      }
+      },
+      voznje:[1,3,4]
     },
     {
       id: 3,
@@ -57,7 +59,8 @@ export class KorisnikService {
         model: "",
         godiste: null,
         boja: ""
-      }
+      },
+      voznje: [1,3,6,7,8]
     },
     {
       id: 4,
@@ -74,7 +77,8 @@ export class KorisnikService {
         model: "",
         godiste: null,
         boja: ""
-      }
+      },
+      voznje: [3,6,9]
     },
     {
       id: 5,
@@ -91,7 +95,8 @@ export class KorisnikService {
         model: "Fiesta",
         godiste: 2012,
         boja: "crvena"
-      }
+      },
+      voznje: [2,5,6,7]
     }
   ]
 
@@ -107,8 +112,18 @@ export class KorisnikService {
       korisnik.email == email && korisnik.lozinka == lozinka) != undefined;
   }
 
+  imaAutomobil(email: string):boolean{
+    let automobil: boolean;
+    KorisnikService.korisnikPodaci.forEach(korisnik=>{
+      if(korisnik.email == email){
+        automobil = korisnik.automobil.registarskaOznaka!="";
+      }
+    });
+    return automobil;
+  }
+
   getImeByEmail(email:string):string{
-    let ime:string;
+    let ime: string;
     KorisnikService.korisnikPodaci.forEach(korisnik=>{
       if(korisnik.email == email){
         ime = korisnik.ime;
@@ -117,8 +132,18 @@ export class KorisnikService {
     return ime;
   }
 
+  getIdByEmail(email:string):number{
+    let id: number;
+    KorisnikService.korisnikPodaci.forEach(korisnik=>{
+      if(korisnik.email == email){
+        id = korisnik.id;
+      }
+    });
+    return id;
+  }
+
   getTipByEmail(email:string):string{
-    let tip:string;
+    let tip: string;
     KorisnikService.korisnikPodaci.forEach(korisnik=>{
       if(korisnik.email == email){
         tip = korisnik.tip;
@@ -156,6 +181,9 @@ export class KorisnikService {
       });
   }
 
+  setVoznju(idKorisnik:number, idVoznja:number):void{
+      KorisnikService.korisnikPodaci.find(korisnik=>idKorisnik==korisnik.id).voznje.push(idVoznja);
+  }
 
   registrujKorisnika(ime:string, prezime:string, email:string, lozinka:string, datumRodjenja:Date, tip:'putnik' |'prevoznik'):void{
     let maxId: number = 0;

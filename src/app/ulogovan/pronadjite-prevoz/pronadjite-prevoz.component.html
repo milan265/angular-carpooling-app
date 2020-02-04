@@ -1,15 +1,13 @@
-<section class="mainHeight" fxLayoutAlign="center start">
-    <div fxHide.lt-md fxFlex="25"></div>
-    <form fxFlex="80" fxLayout="column" fxLayoutGap="30px" #f="ngForm" (ngSubmit)="onSubmit(f)">
+<section class="mainHeight">
+    <div *ngIf="pretraga" fxLayoutAlign="center start">
+        <div fxHide.lt-md fxFlex="25"></div>
+        <form fxFlex="80" fxLayout="column" fxLayoutGap="30px" #f="ngForm" (ngSubmit)="onSubmit(f)">
             <mat-card fxLayout="column">
                 <div fxLayoutAlign="center center">
                     <mat-card-title>Pronađite svoju vožnju do fakulteta </mat-card-title>
                 </div>
                 
                 <mat-card-content fxLayout="column">
-                    <mat-form-field>
-                        <input type="text" matInput placeholder="Polazište" ngModel name="polaziste" required>
-                    </mat-form-field>
                     <mat-form-field>
                         <input type="text" matInput placeholder="Odredište" ngModel name="odrediste" [matAutocomplete]="auto" required>
                         <mat-autocomplete #auto="matAutocomplete">
@@ -24,6 +22,7 @@
                         <mat-datepicker #picker></mat-datepicker>
                     </mat-form-field>
     
+                    <mat-label id="label-vreme">Izaberite interval koji Vam odgovara kao vreme dolaska na fakultet:</mat-label>
                     <div fxLayoutAlign="space-between center">
                         <mat-label>Vreme od</mat-label>
                         <mat-form-field>
@@ -69,6 +68,8 @@
                 <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Pretraži</button>
             </div>
         </form>
-    
-    <div fxHide.lt-md fxFlex="25"></div>
+        
+        <div fxHide.lt-md fxFlex="25"></div>
+    </div> 
+    <app-prikaz *ngIf="!pretraga"></app-prikaz>
 </section>

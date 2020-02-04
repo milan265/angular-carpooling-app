@@ -23,6 +23,7 @@ import { VoznjeComponent } from './ulogovan/voznje/voznje.component';
 import { AktivneComponent } from './ulogovan/voznje/aktivne/aktivne.component';
 import { IstorijatComponent } from './ulogovan/voznje/istorijat/istorijat.component';
 import { VoznjaService } from './ulogovan/voznje/voznja.service';
+import { PrikazComponent } from './ulogovan/pronadjite-prevoz/prikaz/prikaz.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { VoznjaService } from './ulogovan/voznje/voznja.service';
     Page404Component,
     VoznjeComponent,
     AktivneComponent,
-    IstorijatComponent
+    IstorijatComponent,
+    PrikazComponent
   ],
   imports: [
     BrowserModule,

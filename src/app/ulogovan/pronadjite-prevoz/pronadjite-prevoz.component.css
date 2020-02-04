@@ -9,3 +9,12 @@ form{
 mat-card{
     margin-bottom: 3em;
 }
+#label-vreme{
+    margin-top: 3em;
+    margin-bottom: 0.25em;
+    font-size: 1.25em;
+}
+
+mat-header-cell{
+    font-size: 1em;
+}
