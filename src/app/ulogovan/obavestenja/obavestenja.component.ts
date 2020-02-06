@@ -95,5 +95,6 @@ export class ObavestenjaComponent implements OnInit {
   oceni(poruka):void{
     poruka.odgovor = true;
     this.porukaService.getPorukaById(poruka.idPoruke).odgovor =true;
+    
   }
 }

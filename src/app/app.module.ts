@@ -27,6 +27,7 @@ import { PrikazComponent } from './ulogovan/pronadjite-prevoz/prikaz/prikaz.comp
 import { PorukaService } from './ulogovan/obavestenja/poruka.service';
 import { IzmenaComponent } from './ulogovan/voznje/aktivne/izmena/izmena.component';
 import { OceniVoznjuComponent } from './ulogovan/voznje/oceni-voznju/oceni-voznju.component';
+import { Ng5SliderModule } from 'ng5-slider';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { OceniVoznjuComponent } from './ulogovan/voznje/oceni-voznju/oceni-voznj
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Ng5SliderModule
   ],
   providers: [CookieService,KorisnikService,VoznjaService,PorukaService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}}],

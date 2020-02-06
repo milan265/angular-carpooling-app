@@ -1,0 +1,13 @@
+section{
+    width: max-content;
+    padding: 1em;
+}
+mat-dialog-content{
+    width: 20vw;
+    padding-top: 2em;
+    margin-top: 0px;
+    margin-bottom: 2em;
+}
+textarea{
+    background-color: whitesmoke;
+}

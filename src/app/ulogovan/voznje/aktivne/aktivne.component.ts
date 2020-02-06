@@ -105,7 +105,18 @@ export class AktivneComponent implements OnInit, AfterViewInit {
     });
   }
   zavrsiVoznju(id:number):void{
-    this.dialog.open(OceniVoznjuComponent);
+    const dialogRef = this.dialog.open(OceniVoznjuComponent,{
+      data:{
+        idVoznje:id,
+        putnikOcenjuje:false
+      }
+    });
+    dialogRef.afterClosed().subscribe(res=>{
+      if(res){
+        this.podaciZaTabelu.data = this.getSveAktivneVoznje();
+      }
+    });
+    
   }
   otkaziVoznju(id:number):void{
     let naslov:string = "Otkazivanje vožnje";

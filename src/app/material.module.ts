@@ -18,7 +18,8 @@ import { MatButtonModule, MatIconModule, MatFormFieldModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    MatExpansionModule} from '@angular/material';
+    MatExpansionModule,
+    MatSliderModule} from '@angular/material';
 
 @NgModule ({
     imports:[
@@ -45,7 +46,8 @@ import { MatButtonModule, MatIconModule, MatFormFieldModule,
         MatTableModule,
         MatSortModule,
         MatPaginatorModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatSliderModule
     ],
     exports:[
         MatButtonModule,
@@ -71,7 +73,8 @@ import { MatButtonModule, MatIconModule, MatFormFieldModule,
         MatTableModule,
         MatSortModule,
         MatPaginatorModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatSliderModule
     ]
 })
 

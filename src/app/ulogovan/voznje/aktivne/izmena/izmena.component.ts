@@ -50,7 +50,7 @@ export class IzmenaComponent implements OnInit {
     this.status = this.voznja.status;
   }
 
-  sacuvaj(){
+  sacuvaj():void{
     if(this.polaziste!="" && this.odrediste!="" && this.datumPolaska!=null){
       this.voznja.polaziste = this.polaziste;
       this.voznja.odrediste = this.odrediste;

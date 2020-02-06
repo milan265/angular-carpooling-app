@@ -27,7 +27,8 @@ export class KorisnikService {
       },
       voznje:[1,2,3,4,5,6,8,9],
       poruke:[7,5,4,2],
-      porukeProcitane:[false,false,true,true]
+      porukeProcitane:[false,false,true,true],
+      ocene:[]
     },
     {
       id: 2,
@@ -48,7 +49,8 @@ export class KorisnikService {
       voznje:[1,3,4],
       telefon: "066123456",
       poruke:[],
-      porukeProcitane: []
+      porukeProcitane: [],
+      ocene:[]
     },
     {
       id: 3,
@@ -68,7 +70,8 @@ export class KorisnikService {
       },
       voznje: [1,3,6,7,8,9],
       poruke:[],
-      porukeProcitane: []
+      porukeProcitane: [],
+      ocene:[]
     },
     {
       id: 4,
@@ -88,7 +91,8 @@ export class KorisnikService {
       },
       voznje: [3,6,10],
       poruke:[],
-      porukeProcitane: []
+      porukeProcitane: [],
+      ocene:[]
     },
     {
       id: 5,
@@ -109,7 +113,8 @@ export class KorisnikService {
       voznje: [2,5,6,7,8,9],
       telefon: "061456123",
       poruke:[6,3,1],
-      porukeProcitane:[false,true,true]
+      porukeProcitane:[false,true,true],
+      ocene:[]
     },
     {
       id: 6,
@@ -129,7 +134,8 @@ export class KorisnikService {
       },
       voznje: [],
       poruke:[],
-      porukeProcitane: []
+      porukeProcitane: [],
+      ocene:[]
     }
   ]
 

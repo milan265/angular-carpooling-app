@@ -1,1 +1,26 @@
-<p>oceni-voznju works!</p>
+<section fxLayout="column" fxLayoutAlign="center center">
+    <mat-label *ngIf="putnikOcenjuje" mat-dialog-title>Ocenite prevoznika</mat-label>
+    <mat-label *ngIf="!putnikOcenjuje" mat-dialog-title>Ocenite putnike</mat-label>
+
+    <div *ngIf="!putnikOcenjuje" fxLayout="row" fxLayoutGap="2em">
+        <mat-dialog-content *ngFor="let p of putnici;let i=index" fxLayout="column" fxLayoutGap="2em">
+            <mat-label>{{imenaPutnika[i]}}</mat-label>
+            <mat-slider color="primary" [max]="5" [min]="1" [step]="1" [thumbLabel]="true" [tickInterval]="1" [(ngModel)]="vrednost[i]"></mat-slider>        
+            <textarea type="text" matInput placeholder="Komentar o putniku" ngModel
+                                [(ngModel)]="komentar[i]" rows="5" cols="20"></textarea>    
+        </mat-dialog-content>
+    </div>
+    <div *ngIf="putnikOcenjuje" fxLayout="row" fxLayoutGap="2em">
+        <mat-dialog-content fxLayout="column" fxLayoutGap="2em">
+            <mat-slider color="primary" [max]="5" [min]="1" [step]="1" [thumbLabel]="true" [tickInterval]="1" [(ngModel)]="vrednost"></mat-slider>        
+            <textarea type="text" matInput placeholder="Komentar o prevozniku" ngModel
+                                [(ngModel)]="dodatniDetalji" rows="5" cols="20"></textarea>    
+        </mat-dialog-content>
+    </div>
+    
+
+    <mat-dialog-actions fxLayoutAlign="center center">
+        <button *ngIf="!putnikOcenjuje" mat-raised-button color="primary" [mat-dialog-close]="true" (click)="oceni()">Ocenite</button>
+        <button *ngIf="putnikOcenjuje" mat-raised-button color="primary" [mat-dialog-close]="true" (click)="oceni()">Ocenite</button>
+    </mat-dialog-actions>
+</section>
