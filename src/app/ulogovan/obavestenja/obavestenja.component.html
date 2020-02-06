@@ -1,37 +1,44 @@
-<section class="mainHeight" fxLayoutAlign="center start">
-    <div fxHide.lt-md fxFlex="25"></div>
+<section class="mainHeight">
+    <div *ngIf="porukeProsireno.length>0">
+        <div fxHide.lt-md fxFlex="25"></div>
 
-    <mat-accordion fxFlex="80">
-        <mat-expansion-panel *ngFor="let poruka of porukeProsireno;let i=index" (click)="procitaj(poruka,i);">
-            <mat-expansion-panel-header [ngClass]="{'procitano': !poruka.procitana}">
-                <mat-panel-title>
-                    {{poruka.naslov}}
-                </mat-panel-title>
-                <mat-panel-description>
-                    {{poruka.tekst}}
-                </mat-panel-description>
-            </mat-expansion-panel-header>
+        <mat-accordion fxFlex="80" >
+            <mat-expansion-panel *ngFor="let poruka of porukeProsireno;let i=index" (click)="procitaj(poruka,i);">
+                <mat-expansion-panel-header [ngClass]="{'procitano': !poruka.procitana}">
+                    <mat-panel-title>
+                        {{poruka.naslov}}
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        {{poruka.tekst}}
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
           
-            <div *ngIf="poruka.tip=='zahtev'" fxLayout="column" fxLayoutAlign="center center">
-                <p>Da li prihvatate vožnju?</p>
-                <div fxLayoutGap="20px">
-                    <button mat-raised-button color="primary">Prihvatam</button>
-                    <button mat-raised-button color="primary">Ne prihvatam</button>
+                <div *ngIf="poruka.tip=='zahtev'" fxLayout="column" fxLayoutAlign="center center">
+                    <p>Da li prihvatate vožnju?</p>
+                    <div fxLayoutGap="20px">
+                        <button mat-raised-button color="primary">Prihvatam</button>
+                        <button mat-raised-button color="primary">Ne prihvatam</button>
+                    </div>
                 </div>
-            </div>
 
-            <div *ngIf="poruka.tip=='zavrsena'" fxLayout="column" fxLayoutAlign="center center">
-                <p>Vožnja je završena</p>
-                <button mat-raised-button color="primary">Ocenite prevoznika</button>
-            </div>
+                <div *ngIf="poruka.tip=='zavrsena'" fxLayout="column" fxLayoutAlign="center center">
+                    <p>Vožnja je završena</p>
+                    <p>Ocenili ste prevoznika</p>
+                    <button mat-raised-button color="primary">Ocenite prevoznika</button>
+                </div>
             
     
-            <div fxLayoutAlign="end center"> 
-                <p>Datum poslate poruke: {{poruka.datum.toLocaleDateString()}}</p>
-            </div>
+                <div fxLayoutAlign="end center"> 
+                    <p>Datum poslate poruke: {{poruka.datum.toLocaleDateString()}}</p>
+                </div>
           
-        </mat-expansion-panel>
-    </mat-accordion>
+            </mat-expansion-panel>
+        </mat-accordion>
+        <div fxHide.lt-md fxFlex="25"></div>
+    </div>
 
-    <div fxHide.lt-md fxFlex="25"></div>
+    <div id="nema-poruka" *ngIf="porukeProsireno.length==0" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px">
+        <img src="../../../assets/slike/postansko-sanduce.jpg">
+        <p>Trenutno nema poruka</p>
+    </div>
 </section>

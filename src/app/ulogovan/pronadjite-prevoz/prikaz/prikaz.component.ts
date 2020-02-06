@@ -5,6 +5,8 @@ import { PronadjitePrevozComponent } from '../pronadjite-prevoz.component';
 import { VoznjaService } from '../../voznje/voznja.service';
 import { Korisnik } from '../../profil/korisnik.model';
 import { KorisnikService } from 'src/app/auth/korisnik.service';
+import { PorukaService } from '../../obavestenja/poruka.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-prikaz',
@@ -22,7 +24,8 @@ export class PrikazComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort,{static:false}) sort : MatSort;
   @ViewChild(MatPaginator,{static:false}) paginator : MatPaginator;
 
-  constructor(private pronadji:PronadjitePrevozComponent, private korisnikService: KorisnikService, private snackBar:MatSnackBar) { }
+  constructor(private pronadji:PronadjitePrevozComponent, private korisnikService: KorisnikService, 
+    private porukaService:PorukaService, private voznjaService:VoznjaService,private snackBar:MatSnackBar, private cookieService:CookieService) { }
 
   ngOnInit() {
     this.podaciZaTabelu.data = VoznjaService.voznjaPodaci.filter(voznja=>{
@@ -68,6 +71,14 @@ export class PrikazComponent implements OnInit, AfterViewInit {
     return poruka;
   }
   posaljiZahtevZaVoznju(id:number):void{
+    let naslov:string = "Zahtev za vožnju";
+    let email:string = this.cookieService.get("korisnikEmail");
+    let korisnikIme:string = this.korisnikService.getImeByEmail(email);
+    let tekst:string = korisnikIme + " Vam šalje zahtev za vožnju";
+    let ko:number = this.korisnikService.getIdByEmail(email);
+    let kome:Array<number> = [];
+    kome.push(this.voznjaService.getPrevoznikById(id));
+    this.porukaService.posaljiPoruku(naslov,tekst, ko, kome, "zahtev", id);
     this.snackBar.open('Uspešno ste poslali zahtev za vožnju');
   }
 
@@ -75,3 +86,4 @@ export class PrikazComponent implements OnInit, AfterViewInit {
     this.podaciZaTabelu.filter = v.trim().toLocaleLowerCase();
   }
 }
+

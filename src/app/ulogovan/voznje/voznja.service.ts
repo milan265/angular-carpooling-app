@@ -184,6 +184,11 @@ export class VoznjaService {
 
   constructor(private router:Router, private snackBar:MatSnackBar, private korisnikService:KorisnikService) { }
 
+
+  getPrevoznikById(id:number):number{
+    return VoznjaService.voznjaPodaci.find(voznja=>voznja.id==id).prevoznik;
+  }
+
   dodajVoznju(prevoznik:number, polaziste:string, odrediste:string, stajaliste1:string, stajaliste2:string, stajaliste3:string,
     datumPolaska:Date, satOd:string, minutOd:string, satDo:string, minutDo:string,
     brojSlobodnihMesta:number, dodatniDetalji:string):void{
