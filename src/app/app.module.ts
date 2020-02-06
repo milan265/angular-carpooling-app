@@ -25,6 +25,8 @@ import { IstorijatComponent } from './ulogovan/voznje/istorijat/istorijat.compon
 import { VoznjaService } from './ulogovan/voznje/voznja.service';
 import { PrikazComponent } from './ulogovan/pronadjite-prevoz/prikaz/prikaz.component';
 import { PorukaService } from './ulogovan/obavestenja/poruka.service';
+import { IzmenaComponent } from './ulogovan/voznje/aktivne/izmena/izmena.component';
+import { OceniVoznjuComponent } from './ulogovan/voznje/oceni-voznju/oceni-voznju.component';
 
 
 @NgModule({
@@ -42,7 +44,9 @@ import { PorukaService } from './ulogovan/obavestenja/poruka.service';
     VoznjeComponent,
     AktivneComponent,
     IstorijatComponent,
-    PrikazComponent
+    PrikazComponent,
+    IzmenaComponent,
+    OceniVoznjuComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +59,7 @@ import { PorukaService } from './ulogovan/obavestenja/poruka.service';
   ],
   providers: [CookieService,KorisnikService,VoznjaService,PorukaService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [IzmenaComponent, OceniVoznjuComponent]
 })
 export class AppModule { }

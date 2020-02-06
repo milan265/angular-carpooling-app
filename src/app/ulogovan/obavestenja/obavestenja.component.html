@@ -14,17 +14,18 @@
                 </mat-expansion-panel-header>
           
                 <div *ngIf="poruka.tip=='zahtev'" fxLayout="column" fxLayoutAlign="center center">
-                    <p>Da li prihvatate vožnju?</p>
-                    <div fxLayoutGap="20px">
-                        <button mat-raised-button color="primary">Prihvatam</button>
-                        <button mat-raised-button color="primary">Ne prihvatam</button>
+                    <p *ngIf="poruka.odgovor">Već ste odgovorili na zahtev</p>
+                    <p *ngIf="!poruka.odgovor">Da li prihvatate vožnju?</p>
+                    <div *ngIf="!poruka.odgovor" fxLayoutGap="20px">
+                        <button mat-raised-button color="primary" (click)="prihvatam(poruka)">Prihvatam</button>
+                        <button mat-raised-button color="primary"(click)="nePrihvatam(poruka)">Ne prihvatam</button>
                     </div>
                 </div>
 
                 <div *ngIf="poruka.tip=='zavrsena'" fxLayout="column" fxLayoutAlign="center center">
                     <p>Vožnja je završena</p>
-                    <p>Ocenili ste prevoznika</p>
-                    <button mat-raised-button color="primary">Ocenite prevoznika</button>
+                    <p *ngIf="poruka.odgovor">Ocenili ste prevoznika</p>
+                    <button *ngIf="!poruka.odgovor" mat-raised-button color="primary" (click)="oceni(poruka)">Ocenite prevoznika</button>
                 </div>
             
     

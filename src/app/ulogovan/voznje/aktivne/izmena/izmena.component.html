@@ -1,0 +1,109 @@
+<section fxLayout="column" fxLayoutAlign="center start">
+    <mat-label mat-dialog-title>Izmena podataka o vožnji</mat-label>
+    
+    <mat-dialog-content>
+        <div fxLayout="row" fxLayoutGap="2em">
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Polazište" ngModel
+                            [(ngModel)]="polaziste" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Odredište" ngModel
+                            [(ngModel)]="odrediste" required>
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Stajalište 1" ngModel
+                            [(ngModel)]="stajalista[0]">
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Stajalište 2" ngModel 
+                            [(ngModel)]="stajalista[1]">
+                </mat-form-field>
+                <mat-form-field>
+                    <input type="text" matInput placeholder="Stajalište 3" ngModel 
+                            [(ngModel)]="stajalista[2]">
+                </mat-form-field>
+            </div>
+        
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <mat-form-field>
+                    <input matInput placeholder="Datum polaska" [(ngModel)]="datumPolaska" [matDatepicker]="picker" ngModel required>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0.1em">
+                    <mat-label>Vreme polaska</mat-label>
+                    <div fxLayoutGap="3em">
+                        <mat-form-field class="vreme">
+                            <mat-label>Sat</mat-label>
+                            <mat-select [(value)]="vremePolaskaSat"  required>
+                            <mat-option *ngFor="let sat of sati" [(value)]="sat">
+                                {{sat}}
+                            </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="vreme">
+                            <mat-label>Minut</mat-label>
+                            <mat-select [(value)]="vremePolaskaMinut"  required>
+                            <mat-option *ngFor="let minut of minuti" [(value)]="minut">
+                                {{minut}}
+                            </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="0.1em">
+                    <mat-label>Vreme dolaska</mat-label>
+                    <div fxLayoutGap="3em">
+                        <mat-form-field class="vreme">
+                            <mat-label>Sat</mat-label>
+                            <mat-select [(value)]="vremeDolaskaSat"  required>
+                                <mat-option *ngFor="let sat of sati" [(value)]="sat">
+                                    {{sat}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field class="vreme">
+                            <mat-label>Minut</mat-label>
+                            <mat-select [(value)]="vremeDolaskaMinut"  required>
+                                <mat-option *ngFor="let minut of minuti" [(value)]="minut">
+                                    {{minut}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+            <div fxLayout="column" fxLayoutAlign="center center">
+                <mat-form-field>
+                    <mat-label>Broj slobodnih mesta</mat-label>
+                    <mat-select [(value)]="brojSlobodnihMesta"  required>
+                        <mat-option *ngFor="let mesto of mesta" [(value)]="mesto">
+                            {{mesto}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Status vožnje</mat-label>
+                    <mat-select [(value)]="status"  required>
+                        <mat-option *ngFor="let s of statusi" [(value)]="s">
+                            {{s}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <textarea type="text" matInput placeholder="Detalji o vožnji" ngModel
+                            [(ngModel)]="dodatniDetalji"></textarea>
+                </mat-form-field>
+                
+            </div>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions fxLayoutAlign="center center">
+        <button mat-raised-button color="primary" [mat-dialog-close]="false">Odustani</button>
+        <button mat-raised-button color="primary" [mat-dialog-close]="true" (click)="sacuvaj()">Sačuvaj</button>
+    </mat-dialog-actions>
+</section>

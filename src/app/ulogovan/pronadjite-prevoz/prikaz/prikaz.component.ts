@@ -28,6 +28,16 @@ export class PrikazComponent implements OnInit, AfterViewInit {
     private porukaService:PorukaService, private voznjaService:VoznjaService,private snackBar:MatSnackBar, private cookieService:CookieService) { }
 
   ngOnInit() {
+    this.podaciZaTabelu.sortingDataAccessor = (item, property) => {
+      if (property === 'vremePolaska') {
+        return item.vremeDolaskaSat + ":" + item.vremePolaskaMinut;
+      } 
+      if(property === 'vremeDolaska'){
+        return item.vremeDolaskaSat + ":" + item.vremeDolaskaMinut;
+      }
+      return item[property];
+      
+    };
     this.podaciZaTabelu.data = VoznjaService.voznjaPodaci.filter(voznja=>{
       let vremeDolaskaUMin: number = voznja.vremeDolaskaSat*60 + voznja.vremeDolaskaMinut;
       let putnikOd: number = this.pronadji.satiOd*60 + this.pronadji.minutiOd;

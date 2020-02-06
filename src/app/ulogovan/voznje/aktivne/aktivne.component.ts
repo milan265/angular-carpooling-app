@@ -1,11 +1,14 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator, MatSnackBar } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatSnackBar, MatDialog } from '@angular/material';
 import { Voznja } from '../voznja.model';
 import { VoznjaService } from '../voznja.service';
 import { Korisnik } from '../../profil/korisnik.model';
 import { CookieService } from 'ngx-cookie-service';
 import { KorisnikService } from 'src/app/auth/korisnik.service';
 import { Router } from '@angular/router';
+import { PorukaService } from '../../obavestenja/poruka.service';
+import { IzmenaComponent } from './izmena/izmena.component';
+import { OceniVoznjuComponent } from '../oceni-voznju/oceni-voznju.component';
 
 @Component({
   selector: 'app-aktivne',
@@ -20,32 +23,48 @@ export class AktivneComponent implements OnInit, AfterViewInit {
 
   stajalista:string = "";
   tipKorisnika:string;
+  korisnik:Korisnik;
 
   @ViewChild(MatSort,{static:false}) sort :MatSort;
   @ViewChild(MatPaginator,{static:false}) paginator :MatPaginator;
 
   constructor(private cookieService: CookieService, private korisnikService:KorisnikService, private router: Router,
-      private snackBar:MatSnackBar) { }
+      private voznjaService:VoznjaService, private porukaService:PorukaService, private snackBar:MatSnackBar,
+      private dialog: MatDialog) { }
 
   ngOnInit() {
     let email = this.cookieService.get("korisnikEmail");
-    let korisnik: Korisnik = this.korisnikService.getKorisnikByEmail(email);
+    this.korisnik = this.korisnikService.getKorisnikByEmail(email);
     this.tipKorisnika = this.cookieService.get('tipKorisnika');
 
-    let sveAktivneVoznje: Array<Voznja> = [];
-    korisnik.voznje.forEach(e=>{
-      let p = VoznjaService.voznjaPodaci.find(v=>e == v.id && v.status=="tekuća");
-      if(p != undefined){
-        sveAktivneVoznje.push(p);
+    this.podaciZaTabelu.sortingDataAccessor = (item, property) => {
+      if (property === 'vremePolaska') {
+        return item.vremeDolaskaSat + ":" + item.vremePolaskaMinut;
+      } 
+      if(property === 'vremeDolaska'){
+        return item.vremeDolaskaSat + ":" + item.vremeDolaskaMinut;
       }
-    });
-    this.podaciZaTabelu.data = sveAktivneVoznje;
+      return item[property];
+      
+    };
 
+    this.podaciZaTabelu.data = this.getSveAktivneVoznje();
   }
 
   ngAfterViewInit(){
     this.podaciZaTabelu.sort = this.sort;
     this.podaciZaTabelu.paginator = this.paginator;
+  }
+
+  getSveAktivneVoznje():Array<Voznja>{
+    let sveAktivneVoznje = [];
+    this.korisnik.voznje.forEach(e=>{
+      let p = VoznjaService.voznjaPodaci.find(v=>e == v.id && v.status=="tekuća");
+      if(p != undefined){
+        sveAktivneVoznje.push(p);
+      }
+    });
+    return sveAktivneVoznje;
   }
 
   pronadjiVoznju(){
@@ -64,11 +83,12 @@ export class AktivneComponent implements OnInit, AfterViewInit {
 
   prikaziPrevoznika(id:number):string{
     let korisnik: Korisnik = this.korisnikService.getKorisnikById(id);
+    let prosecnaOcena: any = korisnik.prosecnaOcena==undefined? "/":korisnik.prosecnaOcena;
     let poruka: string = "Ime: " + korisnik.ime + "\n" + 
                           "Prezime: " + korisnik.prezime + "\n" +
                           "E-mail: " + korisnik.email + "\n" +
                           "Telefon: " + korisnik.telefon + "\n" +
-                          "Ocena: " + korisnik.prosecnaOcena + "\n" +
+                          "Ocena: " + prosecnaOcena + "\n" +
                           "Automobil \n" + 
                           "Marka: " + korisnik.automobil.marka + "\n" +
                           "Model: " + korisnik.automobil.model + "\n" +
@@ -78,12 +98,33 @@ export class AktivneComponent implements OnInit, AfterViewInit {
   }
 
   izmeniVoznju(id:number):void{
-    
+    this.dialog.open(IzmenaComponent,{
+      data:{
+        idVoznje:id
+      }
+    });
   }
   zavrsiVoznju(id:number):void{
-    
+    this.dialog.open(OceniVoznjuComponent);
   }
   otkaziVoznju(id:number):void{
+    let naslov:string = "Otkazivanje vožnje";
+    let email:string = this.cookieService.get("korisnikEmail");
+    let korisnikIme:string = this.korisnikService.getImeByEmail(email);
+    let tekst:string = korisnikIme + " je otkazao/la vožnju";
+    let ko:number = this.korisnikService.getIdByEmail(email);
+    let kome:Array<number> = [];
+    kome.push(this.voznjaService.getPrevoznikById(id));
+    this.porukaService.posaljiPoruku(naslov,tekst, ko, kome, "otkazao", id);
+
+    //uklanja se voznja iz niza voznji
+    let korisnik: Korisnik = this.korisnikService.getKorisnikByEmail(email);
+    let indeks = korisnik.voznje.indexOf(id);
+    korisnik.voznje.splice(indeks,1);
+    this.voznjaService.oslobodiMesto(id);
+  
+    //u podatke za tabelu upisemo aktivne voznje
+    this.podaciZaTabelu.data = this.getSveAktivneVoznje();
 
     this.snackBar.open("Uspešno ste otkazali vožnju");
   }

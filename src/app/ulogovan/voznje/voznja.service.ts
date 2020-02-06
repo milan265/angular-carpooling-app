@@ -189,6 +189,15 @@ export class VoznjaService {
     return VoznjaService.voznjaPodaci.find(voznja=>voznja.id==id).prevoznik;
   }
 
+  getVoznjaById(id:number):Voznja{
+    return VoznjaService.voznjaPodaci.find(voznja=> voznja.id==id);
+  }
+
+  oslobodiMesto(id:number):void{
+    let voznja: Voznja = this.getVoznjaById(id);
+    voznja.brojSlobodnihMesta++;
+  }
+
   dodajVoznju(prevoznik:number, polaziste:string, odrediste:string, stajaliste1:string, stajaliste2:string, stajaliste3:string,
     datumPolaska:Date, satOd:string, minutOd:string, satDo:string, minutDo:string,
     brojSlobodnihMesta:number, dodatniDetalji:string):void{

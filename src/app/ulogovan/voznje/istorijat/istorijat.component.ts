@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { KorisnikService } from 'src/app/auth/korisnik.service';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { Router } from '@angular/router';
+import { AktivneComponent } from '../aktivne/aktivne.component';
 
 @Component({
   selector: 'app-istorijat',
@@ -18,6 +19,7 @@ export class IstorijatComponent implements OnInit, AfterViewInit {
             'vremeDolaska','prevoznik','brojSlobodnihMesta','dodatniDetalji','status','datumObjave'];
   podaciZaTabelu = new MatTableDataSource<Voznja>();
 
+  korisnik:Korisnik;
   stajalista:string = "";
 
   @ViewChild(MatSort,{static:false}) sort : MatSort;
@@ -27,17 +29,30 @@ export class IstorijatComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     let email = this.cookieService.get("korisnikEmail");
-    let korisnik: Korisnik = this.korisnikService.getKorisnikByEmail(email);
-
-    let sveVoznje: Array<Voznja> = [];
-    korisnik.voznje.forEach(e=>sveVoznje.push(VoznjaService.voznjaPodaci.find(v=>e == v.id)));
+    this.korisnik= this.korisnikService.getKorisnikByEmail(email);
+    this.podaciZaTabelu.sortingDataAccessor = (item, property) => {
+      if (property === 'vremePolaska') {
+        return item.vremeDolaskaSat + ":" + item.vremePolaskaMinut;
+      } 
+      if(property === 'vremeDolaska'){
+        return item.vremeDolaskaSat + ":" + item.vremeDolaskaMinut;
+      }
+      return item[property];
+      
+    };
     
-    this.podaciZaTabelu.data = sveVoznje;
+    this.podaciZaTabelu.data = this.getSveVoznje();
   }
 
   ngAfterViewInit(){
     this.podaciZaTabelu.sort = this.sort;
     this.podaciZaTabelu.paginator = this.paginator;
+  }
+
+  getSveVoznje():Array<Voznja>{
+    let sveVoznje:Array<Voznja> = [];
+    this.korisnik.voznje.forEach(e=>sveVoznje.push(VoznjaService.voznjaPodaci.find(v=>e == v.id)));
+    return sveVoznje;
   }
 
   pronadjiVoznju(){

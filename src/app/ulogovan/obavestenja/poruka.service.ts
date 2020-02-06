@@ -16,27 +16,30 @@ export class PorukaService {
       kome: [1],
       tip: "zavrsena",
       idVoznje: 6,
-      datum: new Date(2020,1,5)
+      datum: new Date(2020,1,5),
+      odgovor: false
     },
     {
       id: 6,
-      naslov: "Zahtev za vožnju",
-      tekst: "Milan je odustao od Vaše vožnje",
+      naslov: "Otkazivanje vožnje",
+      tekst: "Milan je otkazao/la vožnju",
       ko: 1,
       kome: [5],
-      tip: "odustao",
+      tip: "otkazao",
       idVoznje: 7,
-      datum: new Date(2020,1,4)
+      datum: new Date(2020,1,4),
+      odgovor: false
     },
     {
       id: 5,
       naslov: "Izmenjena vožnja",
-      tekst: "Jovana je promenila detalje vožnje u kojoj Vi učestvujete",
+      tekst: "Jovana je promenio/la detalje vožnje u kojoj Vi učestvujete",
       ko: 5,
       kome: [1,3,4],
       tip: "izmenjena",
       idVoznje: 6,
-      datum: new Date(2020,1,3)
+      datum: new Date(2020,1,3),
+      odgovor: false
     },
     {
       id: 4,
@@ -46,7 +49,8 @@ export class PorukaService {
       kome: [1],
       tip: "potvrda",
       idVoznje: 7,
-      datum: new Date(2020,1,2)
+      datum: new Date(2020,1,2),
+      odgovor: false
     },
     {
       id: 3,
@@ -56,7 +60,8 @@ export class PorukaService {
       kome: [5],
       tip: "zahtev",
       idVoznje: 7,
-      datum: new Date(2020,1,2)
+      datum: new Date(2020,1,2),
+      odgovor: false
     },
     {
       id: 2,
@@ -66,7 +71,8 @@ export class PorukaService {
       kome: [1],
       tip: 'potvrda',
       idVoznje: 2,
-      datum: new Date(2020,1,1)
+      datum: new Date(2020,1,1),
+      odgovor: false
     },
     {
       id: 1,
@@ -76,7 +82,8 @@ export class PorukaService {
       kome: [5],
       tip: 'zahtev',
       idVoznje: 2,
-      datum: new Date(2020,1,1)
+      datum: new Date(2020,1,1),
+      odgovor: false
     }
   ];
 
@@ -87,7 +94,7 @@ export class PorukaService {
   }
 
   posaljiPoruku(naslov:string, tekst:string, ko:number, kome:Array<number>, 
-                tip:'zahtev'|'odustao'|'potvrda'|'izmenjena'|'zavrsena', idVoznje: number):void{
+                tip:'zahtev'|'otkazao'|'potvrda'|'izmenjena'|'zavrsena', idVoznje: number):void{
     let maxId: number = 0;
     PorukaService.porukaPodaci.forEach(poruka=>{
         if(maxId < poruka.id){
@@ -97,10 +104,9 @@ export class PorukaService {
     );
     let id:number = ++maxId;
     let datum: Date = new Date();
-    let poruka:Poruka = {id,naslov,tekst,ko,kome,tip,idVoznje,datum};
+    let odgovor: boolean = false;
+    let poruka:Poruka = {id,naslov,tekst,ko,kome,tip,idVoznje,datum,odgovor};
     PorukaService.porukaPodaci.push(poruka);
-    
-    this.korisnikService.getKorisnikById(ko).poruke.unshift(id);
     kome.forEach(k=>{
       this.korisnikService.getKorisnikById(k).poruke.unshift(id);
       this.korisnikService.getKorisnikById(k).porukeProcitane.unshift(false);
