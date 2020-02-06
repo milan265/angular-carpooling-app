@@ -22,7 +22,7 @@ export class AppComponent implements OnInit{
 
   prijavljenKorisnikIme: string;
   tipKorisnika: string;
-  brojObavestenja: number = 3;
+  brojObavestenja: number;
 
 
   constructor (private cookieService: CookieService, private router: Router, private snackBar: MatSnackBar,
@@ -39,6 +39,7 @@ export class AppComponent implements OnInit{
       this.tipKorisnika = this.cookieService.get('tipKorisnika');*///ovo bi moglo kad bi se podaci cuvali u bazi
       let email:string = this.cookieService.get('korisnikEmail');
       this.prijavljenKorisnikIme = this.korisnikService.getImeByEmail(email);
+      this.brojObavestenja = parseInt(this.cookieService.get('brojObavestenja'));
       this.tipKorisnika = this.korisnikService.getTipByEmail(email);
       this.cookieService.set('prijavljenKorisnikIme',this.prijavljenKorisnikIme);
       this.cookieService.set('tipKorisnika',this.tipKorisnika);
@@ -75,6 +76,7 @@ export class AppComponent implements OnInit{
     this.cookieService.set('prijavljenKorisnikIme',"");
     this.cookieService.set('tipKorisnika',"");
     this.cookieService.set('korisnikEmail',"");
+    this.cookieService.set('brojObavestenja',"");
     this.ulogovan = false;
     this.snackBar.open("Odjavili ste se");
   }

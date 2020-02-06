@@ -44,6 +44,7 @@ export class RegistracijaComponent implements OnInit {
         this.cookieService.set('tipKorisnika',this.appComponent.tipKorisnika);
         this.cookieService.set('korisnikEmail', email);
         this.cookieService.set('ulogovan','true');
+        this.cookieService.set('brojObavestenja','0');
         this.appComponent.ulogovan = true;
         this.router.navigate(['']);
         this.snackBar.open("Uspešno ste se registrovali");

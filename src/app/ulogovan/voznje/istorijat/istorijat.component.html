@@ -1,54 +1,64 @@
 <section class="mainHeight">
     <div *ngIf="podaciZaTabelu.data.length!=0">
+        <div fxLayoutAlign="center center">
+            <mat-form-field fxFlex="40%">
+                <input matInput type="text" (keyup)="filterTabele($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+        </div>
         <mat-table [dataSource]='podaciZaTabelu' matSort>
             <ng-container matColumnDef="polaziste">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Polazište</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.polaziste}}</mat-cell>
+                <mat-cell matTooltip="{{element.polaziste}}" *matCellDef="let element">{{element.polaziste}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="odrediste">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Odredište</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.odrediste}}</mat-cell>
+                <mat-cell matTooltip="{{element.odrediste}}" *matCellDef="let element">{{element.odrediste}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="stajalista">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Stajališta</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.stajalista}}</mat-cell>
+                <mat-cell matTooltip="{{element.stajalista}}" *matCellDef="let element">{{prikaziStajalista(element.stajalista)}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="datumPolaska">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Datum polaska</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.datumPolaska}}</mat-cell>
+                <mat-cell matTooltip="{{element.datumPolaska.toLocaleDateString()}}" *matCellDef="let element">{{element.datumPolaska.toLocaleDateString()}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="vremePolaska">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Vreme polaska</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.polaziste}}</mat-cell>
+                <mat-cell matTooltip="{{element.vremePolaskaSat + ':' + element.vremePolaskaMinut}}" *matCellDef="let element">{{element.vremePolaskaSat + ":" + element.vremePolaskaMinut}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="vremeDolaska">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Vreme dolaska</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.polaziste}}</mat-cell>
+                <mat-cell matTooltip="{{element.vremeDolaskaSat + ':' + element.vremeDolaskaMinut}}" *matCellDef="let element">{{element.vremeDolaskaSat + ":" + element.vremeDolaskaMinut}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="prevoznik">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Prevoznik</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.prevoznik}}</mat-cell>
+                <mat-cell matTooltip="{{prikaziPrevoznika(element.prevoznik)}}" *matCellDef="let element">{{prikaziPrevoznikaIme(element.prevoznik)}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="brojSlobodnihMesta">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Broj slobodnih mesta</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.brojSlobodnihMesta}}</mat-cell>
+                <mat-cell matTooltip="{{element.brojSlobodnihMesta}}" *matCellDef="let element">{{element.brojSlobodnihMesta}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="dodatniDetalji">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Dodatni detalji</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.dodatniDetalji}}</mat-cell>
+                <mat-cell matTooltip="{{element.dodatniDetalji}}" *matCellDef="let element">{{element.dodatniDetalji}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="status">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.status}}</mat-cell>
+                <mat-cell matTooltip="{{element.status}}" *matCellDef="let element">{{element.status}}</mat-cell>
             </ng-container>
             <ng-container matColumnDef="datumObjave">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>Datum objave</mat-header-cell>
-                <mat-cell *matCellDef="let element">{{element.datumObjave}}</mat-cell>
+                <mat-cell matTooltip="{{element.datumObjave.toLocaleDateString()}}" *matCellDef="let element">{{element.datumObjave.toLocaleDateString()}}</mat-cell>
             </ng-container>
     
             <mat-header-row *matHeaderRowDef="kolone"></mat-header-row>
             <mat-row *matRowDef="let rows; columns: kolone;"></mat-row>
         </mat-table>
-        <mat-paginator [pageSize]="2" [pageSizeOptions]="[2,4,6,8,10]"></mat-paginator>
+        <mat-paginator [pageSize]="4" [pageSizeOptions]="[2,4,6,8,10]"></mat-paginator>
+    </div>
+    <div id="prazna-tabela" *ngIf="podaciZaTabelu.data.length==0" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px">
+        <img src="../../../../assets/slike/prva-voznja.jpg">
+        <p>Pronađite Vašu prvu vožnju</p>
+        <button type="button" mat-raised-button color="primary" (click)="pronadjiVoznju()">Pronađite vožnju</button>
     </div>
 </section>

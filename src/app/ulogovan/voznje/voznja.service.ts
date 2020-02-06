@@ -122,6 +122,23 @@ export class VoznjaService {
       vremeDolaskaSat: 11,
       vremeDolaskaMinut: 45,
       prevoznik: 5,
+      putnici: [3],
+      brojSlobodnihMesta: 1,
+      dodatniDetalji: "",
+      status: 'završena',
+      datumObjave: new Date(2020,1,5)
+    },
+    {
+      id: 8,
+      polaziste: "Dorćol",
+      odrediste: "Kumodraška 261",
+      stajalista: ["Čubura"],
+      datumPolaska: new Date(2020,1,7),
+      vremePolaskaSat: 18,
+      vremePolaskaMinut: 15,
+      vremeDolaskaSat: 18,
+      vremeDolaskaMinut: 45,
+      prevoznik: 5,
       putnici: [1,3],
       brojSlobodnihMesta: 1,
       dodatniDetalji: "",
@@ -129,7 +146,7 @@ export class VoznjaService {
       datumObjave: new Date(2020,1,5)
     },
     {
-      id: 8,
+      id: 9,
       polaziste: "Dorćol",
       odrediste: "Danijelova 32",
       stajalista: [],
@@ -146,7 +163,7 @@ export class VoznjaService {
       datumObjave: new Date(2020,1,5)
     },
     {
-      id: 9,
+      id: 10,
       polaziste: "Tašmajdan",
       odrediste: "Danijelova 32",
       stajalista: ["Čubura"],
@@ -191,7 +208,7 @@ export class VoznjaService {
 
       let voznja:Voznja = {id,polaziste,odrediste,stajalista,datumPolaska,vremePolaskaSat,vremePolaskaMinut,
         vremeDolaskaSat,vremeDolaskaMinut,prevoznik,putnici,brojSlobodnihMesta,dodatniDetalji,status, datumObjave};
-      VoznjaService.voznjaPodaci.push(voznja);
+      VoznjaService.voznjaPodaci.unshift(voznja);
 
       this.korisnikService.setVoznju(prevoznik,id);
       

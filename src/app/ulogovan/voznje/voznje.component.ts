@@ -11,7 +11,7 @@ export class VoznjeComponent implements OnInit {
   constructor(private titleService: Title) { }
 
   ngOnInit() {
-    this.titleService.setTitle("Istorija vožnji");
+    this.titleService.setTitle("Vožnje");
   }
 
 }

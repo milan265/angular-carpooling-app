@@ -24,6 +24,7 @@ import { AktivneComponent } from './ulogovan/voznje/aktivne/aktivne.component';
 import { IstorijatComponent } from './ulogovan/voznje/istorijat/istorijat.component';
 import { VoznjaService } from './ulogovan/voznje/voznja.service';
 import { PrikazComponent } from './ulogovan/pronadjite-prevoz/prikaz/prikaz.component';
+import { PorukaService } from './ulogovan/obavestenja/poruka.service';
 
 
 @NgModule({
@@ -52,7 +53,7 @@ import { PrikazComponent } from './ulogovan/pronadjite-prevoz/prikaz/prikaz.comp
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [CookieService,KorisnikService,VoznjaService,
+  providers: [CookieService,KorisnikService,VoznjaService,PorukaService,
     {provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: {duration: 2000}}],
   bootstrap: [AppComponent]
 })

@@ -10,3 +10,21 @@ mat-card{
 mat-header-cell{
     font-size: 1em;
 }
+
+mat-cell,mat-header-cell{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#prazna-tabela{
+    margin: 50px;
+}
+img{
+    width: 50%;
+}
+p{
+    font-size: 1.5em;
+    text-align: center;
+}

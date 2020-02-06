@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Korisnik } from '../ulogovan/profil/korisnik.model';
 import { Automobil } from '../ulogovan/profil/automobil.model';
+import { Ocena } from '../ulogovan/profil/ocena.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,9 @@ export class KorisnikService {
         godiste: null,
         boja: ""
       },
-      voznje:[1,2,3,4,5,6,7,8]
+      voznje:[1,2,3,4,5,6,8,9],
+      poruke:[7,5,4,2],
+      porukeProcitane:[false,false,true,true]
     },
     {
       id: 2,
@@ -42,7 +45,10 @@ export class KorisnikService {
         godiste: 2009,
         boja: "bela"
       },
-      voznje:[1,3,4]
+      voznje:[1,3,4],
+      telefon: "066123456",
+      poruke:[],
+      porukeProcitane: []
     },
     {
       id: 3,
@@ -60,7 +66,9 @@ export class KorisnikService {
         godiste: null,
         boja: ""
       },
-      voznje: [1,3,6,7,8]
+      voznje: [1,3,6,7,8,9],
+      poruke:[],
+      porukeProcitane: []
     },
     {
       id: 4,
@@ -78,7 +86,9 @@ export class KorisnikService {
         godiste: null,
         boja: ""
       },
-      voznje: [3,6,9]
+      voznje: [3,6,10],
+      poruke:[],
+      porukeProcitane: []
     },
     {
       id: 5,
@@ -96,7 +106,30 @@ export class KorisnikService {
         godiste: 2012,
         boja: "crvena"
       },
-      voznje: [2,5,6,7]
+      voznje: [2,5,6,7,8,9],
+      telefon: "061456123",
+      poruke:[6,3,1],
+      porukeProcitane:[false,true,true]
+    },
+    {
+      id: 6,
+      ime: "Tamara",
+      prezime: "Savić",
+      email: "tamara.savic.17@mail.rs",
+      lozinka: "tamara123",
+      datumRodjenja: new Date("1998-05-05"),
+      datumRegistrovanja: new Date("2020-02-05"),
+      tip: "putnik",
+      automobil: {
+        registarskaOznaka: "",
+        marka: "",
+        model: "",
+        godiste: null,
+        boja: ""
+      },
+      voznje: [],
+      poruke:[],
+      porukeProcitane: []
     }
   ]
 
@@ -152,8 +185,34 @@ export class KorisnikService {
     return tip;
   }
 
+  getImeById(id:number):string{
+    return KorisnikService.korisnikPodaci.find(korisnik=>korisnik.id == id).ime;
+  }
+
+  getKorisnikById(id:number):Korisnik{
+    return KorisnikService.korisnikPodaci.find(korisnik=>korisnik.id == id);
+  }
+
   getKorisnikByEmail(email:string):Korisnik{
     return KorisnikService.korisnikPodaci.find(korisnik=>korisnik.email == email);
+  }
+
+  getPorukeByEmail(email:string):Array<number>{
+    return KorisnikService.korisnikPodaci.find(korisnik=>korisnik.email == email).poruke;
+  }
+  getBrojNeprocitanihPoruka(email:string):number{
+    let n:number = 0;
+    let korisnik: Korisnik = this.getKorisnikByEmail(email);
+    korisnik.porukeProcitane.forEach(t=>{
+        if(!t){
+          n++;
+        }
+      });
+    return n;
+  }
+
+  getProcitanePoruke(email:string):Array<boolean>{
+    return KorisnikService.korisnikPodaci.find(korisnik=>korisnik.email==email).porukeProcitane;
   }
 
   setKorisnikById(id:number, ime:string, prezime:string, lozinka:string, datumRodjenja:Date, tip: 'putnik' |'prevoznik',
@@ -203,7 +262,10 @@ export class KorisnikService {
       godiste: null,
       boja: ""
     };
-    let korisnik: Korisnik = {id, ime, prezime, email, lozinka, datumRodjenja, datumRegistrovanja, tip, automobil};
+    let voznje:Array<number> = [];
+    let poruke:Array<number> = [];
+    let ocene:Array<Ocena> = [];
+    let korisnik: Korisnik = {id, ime, prezime, email, lozinka, datumRodjenja, datumRegistrovanja, tip, automobil,ocene,voznje,poruke};
     KorisnikService.korisnikPodaci.push(korisnik);
   }
 }

@@ -1,4 +1,5 @@
 import { Automobil } from './automobil.model';
+import { Ocena } from './ocena.model';
 
 export interface Korisnik{
     id: number;
@@ -13,7 +14,9 @@ export interface Korisnik{
     telefon?: string;
     kratakOpis?: string;
     adresa?: string;
-    ocena?: Array<number>;
+    ocene?: Array<Ocena>;
+    prosecnaOcena?: number;
     voznje?: Array<number>;
     poruke?: Array<number>;
+    porukeProcitane?: Array<boolean>;
 }

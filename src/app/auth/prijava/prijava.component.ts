@@ -41,6 +41,7 @@ export class PrijavaComponent implements OnInit {
     this.cookieService.set('prijavljenKorisnikIme',this.appComponent.prijavljenKorisnikIme);
     this.cookieService.set('ulogovan','true');
     this.cookieService.set('korisnikEmail', email);
+    this.cookieService.set('brojObavestenja',this.korisnikService.getBrojNeprocitanihPoruka(email)+"");
     this.appComponent.tipKorisnika = this.korisnikService.getTipByEmail(email);
     this.cookieService.set('tipKorisnika',this.appComponent.tipKorisnika);
     this.appComponent.ulogovan = true;
