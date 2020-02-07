@@ -28,7 +28,21 @@ export class KorisnikService {
       voznje:[1,2,3,4,5,6,8,9],
       poruke:[7,5,4,2],
       porukeProcitane:[false,false,true,true],
-      ocene:[]
+      ocene:[{
+        ocena: 5,
+        komentar: "",
+        ko: 5
+      },
+      {
+        ocena: 4,
+        komentar: "",
+        ko: 5
+      },
+      {
+        ocena: 2,
+        komentar: "",
+        ko: 5
+      }]
     },
     {
       id: 2,
@@ -248,6 +262,15 @@ export class KorisnikService {
 
   setVoznju(idKorisnik:number, idVoznja:number):void{
       KorisnikService.korisnikPodaci.find(korisnik=>idKorisnik==korisnik.id).voznje.push(idVoznja);
+  }
+
+  setProsecnaOcenaById(id:number){
+    let korisnik: Korisnik = this.getKorisnikById(id);
+    if(korisnik.ocene.length>0){
+      let ocene: Array<number> = korisnik.ocene.map(ocena=>ocena.ocena);
+      let zbirOcena: number = ocene.reduce((a,b)=> a+b);
+      korisnik.prosecnaOcena = parseFloat((zbirOcena/ocene.length).toFixed(1));  
+    }
   }
 
   registrujKorisnika(ime:string, prezime:string, email:string, lozinka:string, datumRodjenja:Date, tip:'putnik' |'prevoznik'):void{

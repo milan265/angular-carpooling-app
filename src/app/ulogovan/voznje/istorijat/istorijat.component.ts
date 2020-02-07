@@ -70,12 +70,14 @@ export class IstorijatComponent implements OnInit, AfterViewInit {
   }
 
   prikaziPrevoznika(id:number):string{
+    this.korisnikService.setProsecnaOcenaById(id);
     let korisnik: Korisnik = this.korisnikService.getKorisnikById(id);
+    let prosecnaOcena: any = korisnik.prosecnaOcena==undefined? "/":korisnik.prosecnaOcena;
     let poruka: string = "Ime: " + korisnik.ime + "\n" + 
                           "Prezime: " + korisnik.prezime + "\n" +
                           "E-mail: " + korisnik.email + "\n" +
                           "Telefon: " + korisnik.telefon + "\n" +
-                          "Ocena: " + korisnik.prosecnaOcena + "\n" +
+                          "Ocena: " + prosecnaOcena + "\n" +
                           "Automobil \n" + 
                           "Marka: " + korisnik.automobil.marka + "\n" +
                           "Model: " + korisnik.automobil.model + "\n" +

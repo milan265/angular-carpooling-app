@@ -29,6 +29,7 @@ export class ProfilComponent implements OnInit {
     this.titleService.setTitle("Profil");
     this.email = this.cookieService.get('korisnikEmail');
     this.korisnik = this.korisnikService.getKorisnikByEmail(this.email);
+    this.korisnikService.setProsecnaOcenaById(this.korisnikService.getIdByEmail(this.email));
   }
 
   onSubmit(form : NgForm){

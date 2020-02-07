@@ -82,6 +82,7 @@ export class AktivneComponent implements OnInit, AfterViewInit {
   }
 
   prikaziPrevoznika(id:number):string{
+    this.korisnikService.setProsecnaOcenaById(id);
     let korisnik: Korisnik = this.korisnikService.getKorisnikById(id);
     let prosecnaOcena: any = korisnik.prosecnaOcena==undefined? "/":korisnik.prosecnaOcena;
     let poruka: string = "Ime: " + korisnik.ime + "\n" + 

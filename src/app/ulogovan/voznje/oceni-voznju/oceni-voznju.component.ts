@@ -16,6 +16,8 @@ import { PorukaService } from '../../obavestenja/poruka.service';
 export class OceniVoznjuComponent implements OnInit {
 
   voznja:Voznja;
+  vrednostPutnik:number = 3;//kad putnik ocenjuje
+  komentarOPrevozniku: string = "";
   vrednost: Array<number> = [];
   komentar: Array<string> = [];
   putnikOcenjuje: boolean;
@@ -41,25 +43,35 @@ export class OceniVoznjuComponent implements OnInit {
   }
 
   oceni():void{
-    let i: number = 0;
-    this.voznja.putnici.forEach(putnik=>{
-      let korisnik: Korisnik = this.korisnikService.getKorisnikById(putnik);
-      let ocena:number = this.vrednost[i];
-      let komentar: string = this.komentar[i];
-      let ko:number = this.voznja.prevoznik;
-      let ocenaKorisnika:Ocena = {ocena,komentar,ko};
-      korisnik.ocene.push(ocenaKorisnika);
+    if(this.putnikOcenjuje){
+      let ocena: number = this.vrednostPutnik;
+      let komentar: string = this.komentarOPrevozniku;
+      let ko: number = this.korisnikService.getIdByEmail(this.cookieService.get("korisnikEmail"));
+      let ocenaKorisnika: Ocena = {ocena, komentar, ko};
+      this.korisnikService.getKorisnikById(this.voznja.prevoznik).ocene.push(ocenaKorisnika);
+    }else{
+      let i: number = 0;
+      this.voznja.putnici.forEach(putnik=>{
+        let korisnik: Korisnik = this.korisnikService.getKorisnikById(putnik);
+        let ocena:number = this.vrednost[i];
+        let komentar: string = this.komentar[i];
+        let ko:number = this.voznja.prevoznik;
+        let ocenaKorisnika:Ocena = {ocena,komentar,ko};
+        korisnik.ocene.push(ocenaKorisnika);
+      
+        //salje se poruka putniku
+        let naslov:string = "Završena vožnja";
+        let korisnikIme:string = this.cookieService.get("prijavljenKorisnikIme");
+        let tekst:string = korisnikIme + " Vam šalje upitnik kako biste ocenili vožnju";
+        let koSalje:number = this.voznja.prevoznik;
+        let kome:Array<number> = [putnik];
+        let idVoznje = this.voznja.id;
+        this.porukaService.posaljiPoruku(naslov,tekst, koSalje, kome, "zavrsena", idVoznje);
 
-      //salje se poruka putniku
-      let naslov:string = "Završena vožnja";
-      let korisnikIme:string = this.cookieService.get("prijavljenKorisnikIme");
-      let tekst:string = korisnikIme + " Vam šalje upitnik kako biste ocenili vožnju";
-      let koSalje:number = this.voznja.prevoznik;
-      let kome:Array<number> = [putnik];
-      let idVoznje = this.voznja.id;
-      this.porukaService.posaljiPoruku(naslov,tekst, koSalje, kome, "zavrsena", idVoznje);
-    });
-    this.voznja.status = "završena";
+        i++;
+      });
+      this.voznja.status = "završena";
+    }
   }
 
 }

@@ -7,7 +7,8 @@ import { PorukaService } from './poruka.service';
 import { AppComponent } from 'src/app/app.component';
 import { VoznjaService } from '../voznje/voznja.service';
 import { Voznja } from '../voznje/voznja.model';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
+import { OceniVoznjuComponent } from '../voznje/oceni-voznju/oceni-voznju.component';
 
 @Component({
   selector: 'app-obavestenja',
@@ -25,7 +26,7 @@ export class ObavestenjaComponent implements OnInit {
   constructor(private titleService: Title, private korisnikService:KorisnikService, 
               private porukaService:PorukaService,private cookieService:CookieService,
               private appComponent:AppComponent, private voznjaService:VoznjaService,
-              private snackBar:MatSnackBar) { }
+              private snackBar:MatSnackBar, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.titleService.setTitle("Obaveštenja");
@@ -93,8 +94,17 @@ export class ObavestenjaComponent implements OnInit {
     this.porukaService.getPorukaById(poruka.idPoruke).odgovor =true;
   }
   oceni(poruka):void{
-    poruka.odgovor = true;
-    this.porukaService.getPorukaById(poruka.idPoruke).odgovor =true;
-    
+    const dialogRef = this.dialog.open(OceniVoznjuComponent,{
+      data:{
+        idVoznje:poruka.idVoznje,
+        putnikOcenjuje:true
+      }
+    });
+    dialogRef.afterClosed().subscribe(res=>{
+      if(res){
+        poruka.odgovor = true;
+        this.porukaService.getPorukaById(poruka.idPoruke).odgovor =true;
+      }
+    });
   }
 }

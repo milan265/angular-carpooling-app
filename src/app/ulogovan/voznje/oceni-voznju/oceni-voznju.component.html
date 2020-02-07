@@ -12,12 +12,11 @@
     </div>
     <div *ngIf="putnikOcenjuje" fxLayout="row" fxLayoutGap="2em">
         <mat-dialog-content fxLayout="column" fxLayoutGap="2em">
-            <mat-slider color="primary" [max]="5" [min]="1" [step]="1" [thumbLabel]="true" [tickInterval]="1" [(ngModel)]="vrednost"></mat-slider>        
+            <mat-slider color="primary" [max]="5" [min]="1" [step]="1" [thumbLabel]="true" [tickInterval]="1" [(ngModel)]="vrednostPutnik"></mat-slider>        
             <textarea type="text" matInput placeholder="Komentar o prevozniku" ngModel
-                                [(ngModel)]="dodatniDetalji" rows="5" cols="20"></textarea>    
+                                [(ngModel)]="komentarOPrevozniku" rows="5" cols="20"></textarea>    
         </mat-dialog-content>
     </div>
-    
 
     <mat-dialog-actions fxLayoutAlign="center center">
         <button *ngIf="!putnikOcenjuje" mat-raised-button color="primary" [mat-dialog-close]="true" (click)="oceni()">Ocenite</button>

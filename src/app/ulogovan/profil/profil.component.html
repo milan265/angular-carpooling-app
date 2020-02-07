@@ -176,6 +176,15 @@
         <mat-card *ngIf="!promena">
             <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
                 <div fxLayout="column">
+                    <mat-card-subtitle>Ocena</mat-card-subtitle>
+                    <span>{{korisnik.prosecnaOcena}}</span>
+                </div>
+            </div>
+        </mat-card>
+
+        <mat-card *ngIf="!promena">
+            <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="1vw">
+                <div fxLayout="column">
                     <mat-card-subtitle>Datum registrovanja</mat-card-subtitle>
                     <span>{{korisnik.datumRegistrovanja.toLocaleDateString()}}</span>
                 </div>
