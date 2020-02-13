@@ -294,7 +294,9 @@ export class KorisnikService {
     let voznje:Array<number> = [];
     let poruke:Array<number> = [];
     let ocene:Array<Ocena> = [];
-    let korisnik: Korisnik = {id, ime, prezime, email, lozinka, datumRodjenja, datumRegistrovanja, tip, automobil,ocene,voznje,poruke};
+    let porukeProcitane: Array<boolean> = [];
+    let korisnik: Korisnik = {id, ime, prezime, email, lozinka, datumRodjenja, datumRegistrovanja, tip, 
+                              automobil,ocene,voznje,poruke,porukeProcitane};
     KorisnikService.korisnikPodaci.push(korisnik);
   }
 }
