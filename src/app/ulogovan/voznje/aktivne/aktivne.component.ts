@@ -70,6 +70,9 @@ export class AktivneComponent implements OnInit, AfterViewInit {
   pronadjiVoznju(){
     this.router.navigate(['pronadjite-prevoz']);
   }
+  ponudiVoznju(){
+    this.router.navigate(['ponudite-prevoz']);
+  }
 
   prikaziStajalista(s:Array<string>):string{
     this.stajalista = "";

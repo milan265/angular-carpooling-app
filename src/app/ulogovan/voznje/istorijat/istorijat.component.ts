@@ -20,6 +20,7 @@ export class IstorijatComponent implements OnInit, AfterViewInit {
   podaciZaTabelu = new MatTableDataSource<Voznja>();
 
   korisnik:Korisnik;
+  tipKorisnika:string;
   stajalista:string = "";
 
   @ViewChild(MatSort,{static:false}) sort : MatSort;
@@ -28,6 +29,7 @@ export class IstorijatComponent implements OnInit, AfterViewInit {
   constructor(private cookieService: CookieService, private korisnikService:KorisnikService, private router: Router) { }
 
   ngOnInit() {
+    this.tipKorisnika = this.cookieService.get('tipKorisnika');
     let email = this.cookieService.get("korisnikEmail");
     this.korisnik= this.korisnikService.getKorisnikByEmail(email);
     this.podaciZaTabelu.sortingDataAccessor = (item, property) => {
@@ -57,6 +59,10 @@ export class IstorijatComponent implements OnInit, AfterViewInit {
 
   pronadjiVoznju(){
     this.router.navigate(['pronadjite-prevoz']);
+  }
+
+  ponudiVoznju(){
+    this.router.navigate(['ponudite-prevoz']);
   }
   
   prikaziStajalista(s:Array<string>):string{

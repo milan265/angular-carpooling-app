@@ -41,10 +41,15 @@ export class IzmenaComponent implements OnInit {
     this.odrediste = this.voznja.odrediste;
     this.stajalista = this.voznja.stajalista;
     this.datumPolaska = this.voznja.datumPolaska;
-    this.vremePolaskaSat = this.voznja.vremePolaskaSat + "";
-    this.vremePolaskaMinut = this.voznja.vremePolaskaMinut + "";
-    this.vremeDolaskaSat = this.voznja.vremeDolaskaSat + "";
-    this.vremeDolaskaMinut = this.voznja.vremeDolaskaMinut + "";
+
+    this.vremePolaskaSat = this.voznja.vremePolaskaSat.toString().length==1 ? "0" + this.voznja.vremePolaskaSat : 
+                                                                                this.voznja.vremePolaskaSat + "";
+    this.vremePolaskaMinut = this.voznja.vremePolaskaMinut.toString().length==1 ? "0" + this.voznja.vremePolaskaMinut :
+                                                                                     this.voznja.vremePolaskaMinut + "";
+    this.vremeDolaskaSat = this.voznja.vremeDolaskaSat.toString().length==1 ? "0" + this.voznja.vremeDolaskaSat :
+                                                                                 this.voznja.vremeDolaskaSat + "";
+    this.vremeDolaskaMinut = this.voznja.vremeDolaskaMinut.toString().length==1 ? "0" + this.voznja.vremeDolaskaMinut :
+                                                                                     this.voznja.vremeDolaskaMinut + "";
     this.brojSlobodnihMesta = this.voznja.brojSlobodnihMesta;
     this.dodatniDetalji = this.voznja.dodatniDetalji;
     this.status = this.voznja.status;

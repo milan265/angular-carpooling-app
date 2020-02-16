@@ -38,17 +38,17 @@
                         <mat-form-field class="vreme">
                             <mat-label>Sat</mat-label>
                             <mat-select [(value)]="vremePolaskaSat"  required>
-                            <mat-option *ngFor="let sat of sati" [(value)]="sat">
-                                {{sat}}
-                            </mat-option>
+                                <mat-option *ngFor="let sat of sati" [(value)]="sat">
+                                    {{sat}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
                         <mat-form-field class="vreme">
                             <mat-label>Minut</mat-label>
                             <mat-select [(value)]="vremePolaskaMinut"  required>
-                            <mat-option *ngFor="let minut of minuti" [(value)]="minut">
-                                {{minut}}
-                            </mat-option>
+                                <mat-option *ngFor="let minut of minuti" [(value)]="minut">
+                                    {{minut}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>

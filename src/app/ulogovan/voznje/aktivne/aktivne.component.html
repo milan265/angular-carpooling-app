@@ -78,6 +78,7 @@
     <div id="prazna-tabela" *ngIf="podaciZaTabelu.data.length==0" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="30px">
         <img src="../../../../assets/slike/prva-voznja.jpg">
         <p>Trenutno nemate aktivnu vožnju</p>
-        <button type="button" mat-raised-button color="primary" (click)="pronadjiVoznju()">Pronađite vožnju</button>
+        <button type="button" *ngIf="tipKorisnika=='putnik'" mat-raised-button color="primary" (click)="pronadjiVoznju()">Pronađite vožnju</button>
+        <button type="button" *ngIf="tipKorisnika=='prevoznik'" mat-raised-button color="primary" (click)="ponudiVoznju()">Ponudite vožnju</button>
     </div>
 </section>
